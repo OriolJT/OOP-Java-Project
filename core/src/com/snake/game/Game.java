@@ -1,9 +1,11 @@
 package com.snake.game;
 
+import com.snake.game.screens.MenuScreen;
+
 public class Game {
     private Board m_board;
     private Screen m_screen;
-    private Menu m_menu;
+    private MenuScreen m_menu;
 
     void startGame(){
         m_board.startGame(this);
