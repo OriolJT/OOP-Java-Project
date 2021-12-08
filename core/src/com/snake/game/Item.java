@@ -5,21 +5,33 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import java.awt.*;
 
 public class Item {
-    private int i_value;
+    protected String name;
+    public int i_value;
+    public Cell[][] i_cell;
     private final int i_size = 1;
-    private Cell[][] i_cell;
-    private Image i_img;
-    private Animation i_anim;
 
-    Item(Image img, Animation anim){
-        this.i_img = img;
-        this.i_anim = anim;
-    }
+    Item(){
+        this.name = null;
+        this.i_value = 0;
+        this.i_cell = null;
+    };
 
     public int getI_value() {
         return i_value;
     }
     public void setI_value(int value){
-        i_value = value;
+        this.i_value = value;
+    }
+
+    public Cell[][] getI_cell() {
+        return i_cell;
+    }
+
+    public void setI_cell(Cell[][] i_cell) {
+        this.i_cell = i_cell;
+    }
+
+    public String getName() {
+        return name;
     }
 }
