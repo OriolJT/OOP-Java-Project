@@ -1,0 +1,3 @@
+package com.snake.game;
+public class Player {
+}
