@@ -5,4 +5,8 @@ public class Screen
     void startGame(){
 
     }
+
+    void setHighscore(int highscore){
+
+    }
 }
