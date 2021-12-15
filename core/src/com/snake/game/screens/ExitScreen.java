@@ -2,10 +2,10 @@ package com.snake.game.screens;
 
 import com.badlogic.gdx.Screen;
 
-public class InitialScreen implements Screen {
-    private Screen_Main parent; //to store main
+public class ExitScreen implements Screen {
+    private Screen_Main parent;
 
-    public InitialScreen(Screen_Main main){
+    public ExitScreen(Screen_Main main){
         parent = main;
     }
 
@@ -16,8 +16,7 @@ public class InitialScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        // After loading initialScreen, load menuScreen
-        parent.changeScreen(Screen_Main.MENU_S);
+
     }
 
     @Override

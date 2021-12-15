@@ -12,13 +12,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-public class HighScoreScreen implements Screen {
+public class PlayScreen implements Screen{
 
     private Screen_Main parent;    //main
     private Stage stage;    //controller
     private Label title_L;  //label
 
-    public HighScoreScreen(Screen_Main main){
+    public PlayScreen(Screen_Main main){
         parent = main;
         stage = new Stage(new ScreenViewport()); //create stage as a controller
     }
@@ -37,7 +37,7 @@ public class HighScoreScreen implements Screen {
         Skin skin = new Skin(Gdx.files.internal("skin/neon-ui.json"));
 
         //label
-        title_L = new Label("High Scores", skin);
+        title_L = new Label("Play", skin);
         //back button
         final TextButton back_Bt = new TextButton("Back", skin);
         back_Bt.addListener(new ChangeListener() {
