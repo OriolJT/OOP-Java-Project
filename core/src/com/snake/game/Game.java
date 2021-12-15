@@ -7,10 +7,14 @@ public class Game {
     private Screen m_screen;
     private MenuScreen m_menu;
 
-    void startGame(){
+    void startGame(){ //main will call this function
         m_board.startGame(this);
         m_screen.startGame();
         m_menu.startGame();
+    }
+
+    void gameMode(int mode){ //class screen is gonna call this function with the decision of the player.
+        m_board.gameMode(mode);
     }
 
 
@@ -21,7 +25,7 @@ public class Game {
         m_screen.setHighscore(highscore);
     }
 
-    void moveSnake(int player, int direction){
+    void moveSnake(int player, char direction){
         m_board.moveSnake(player, direction);
     }
 
