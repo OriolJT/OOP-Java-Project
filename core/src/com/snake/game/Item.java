@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 
 import java.awt.*;
 
-public class Item {
+public abstract class Item {
     protected String name;
     public int i_value;
     public Cell[][] i_cell;
@@ -34,4 +34,7 @@ public class Item {
     public String getName() {
         return name;
     }
+    public abstract Animation getAnim();
+    public abstract Image getImg();
+    public abstract int addToScore(int score,int multiplier);
 }
