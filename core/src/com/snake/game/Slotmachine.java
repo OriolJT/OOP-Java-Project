@@ -3,7 +3,7 @@ package com.snake.game;
 public class Slotmachine {
     private Item [] s_slots;
     private final int s_number = 3;
-    public double s_factor;
+    public int s_factor;
 
     Slotmachine(){
         s_slots = new Item[s_number];
@@ -25,7 +25,7 @@ public class Slotmachine {
         s_slots[2] = item3;
     }
 
-    public double s_calcFactor(){
+    public int s_calcFactor(){
         //if the first slot of the Slotmachine is empty,
         //the whole Slotmachine is empty hence the factor will be 1
         if(s_slots[0]==null){
