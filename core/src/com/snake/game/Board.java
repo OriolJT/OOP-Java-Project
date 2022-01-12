@@ -37,28 +37,34 @@ public class Board {
 
     private void createItem(){ //This function can only be called when there is not another item on the board.
         //We create the item making sure that there is not a snake in that posisiton.
-        int row = rand.nextInt(ROWS);
-        int col = rand.nextInt(COLS);
-        if (m_player1.snakeInPos(row, col) == false || m_player2.snakeInPos(row, col) == false){
-            int itemNumber = rand.nextInt(2);
-            Item tempItem;
-            if(itemNumber == 0){
-                tempItem = new Item_Apple();
+        boolean free = false;
+        int row = -1;
+        int col = -1;
+        State temp;
+        while (!free) {
+            row = rand.nextInt(ROWS);
+            col = rand.nextInt(COLS);
+            temp = State.FREE;
+            if (m_cells[row][col].getState() == temp){
+                free = true;
             }
-            else {
-                if (itemNumber == 1) {
-                    tempItem = new Item_Banana();
-                } else {
-                    tempItem = new Item_Kiwi();
-                }
+        }
+
+        int itemNumber = rand.nextInt(2);
+        Item tempItem;
+        if(itemNumber == 0){
+            tempItem = new Item_Apple();
+        }
+        else {
+            if (itemNumber == 1) {
+                tempItem = new Item_Banana();
+            } else {
+                tempItem = new Item_Kiwi();
             }
-            m_item = tempItem; //Since there is only one item on the board, the class Board will have it. But the cell itself will know where the item is.
-            State aux = State.ITEM;
-            m_cells[row][col].setState(aux);
         }
-        else{
-            createItem(); //TODO: SINCE THIS PART IS RECURSIVE, MAKE SURE THAT THERE ARE NO BUGS.
-        }
+        m_item = tempItem; //Since there is only one item on the board, the class Board will have it. But the cell itself will know where the item is.
+        State aux = State.ITEM;
+        m_cells[row][col].setState(aux);
     }
 
     public void setHighscore(int highscore){ //this class will be called by  the class Player when the highscore if the class changes.
