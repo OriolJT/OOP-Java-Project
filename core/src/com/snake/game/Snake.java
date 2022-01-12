@@ -18,13 +18,12 @@ public class Snake {
         head = Cell(COL/2 ,ROWS/2); //need class to get col n rows
         snakeCells.add(head);
         head.setState(Cell.State.SNAKE);
-
     }
+
     void moveSnake(Cell cell){
         //actual movement
         Cell last = snakeCells.removeLast();
         last.setState(Cell.State.FREE);
 
     }
-
 }

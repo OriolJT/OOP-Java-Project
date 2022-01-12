@@ -6,7 +6,7 @@ public class Cell {
 
     public Cell(int x, int y){
         this.x = x;
-        this y = y;
+        this.y = y;
     }
 
     public State getState(){
@@ -25,9 +25,9 @@ public class Cell {
         return y;
     }
 
-    public enum State {
+  /* public enum State {
         FREE,
         SNAKE,
         ITEM
-    }
+    }*/
 }
