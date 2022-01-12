@@ -1,90 +1,57 @@
 package com.snake.game.screens;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.snake.game.Main;
 
-public class RuleScreen implements Screen {
+public class RuleScreen extends Screen_Abstract {
+    private Screen_Main s_main;
+    private Table table;
+    private Label title, rule;
 
-    private Screen_Main parent;    //main
-    private Stage stage;    //controller
-    private Label title_L;  //label
-
-    public RuleScreen(Screen_Main main){
-        parent = main;
-        stage = new Stage(new ScreenViewport()); //create stage as a controller
+    public RuleScreen(Main main, Screen_Main s_main){
+        super(main);
+        this.s_main = s_main;
     }
 
     @Override
     public void show() {
-        Gdx.input.setInputProcessor(stage);
+        if(table != null) table.clear();
+        super.show();
+        table = super.createTable();    //create a table
 
-        //create a table
-        Table table = new Table();
-        table.setFillParent(true);
-        table.setDebug(true);
-        stage.addActor(table);
+        //title label
+        title = new Label("Game Rules", super.getSkin());
+        title.setFontScale(1.5f);
+        table.add(title).center().spaceBottom(30);
+        table.row();
 
-        //temporary skin
-        Skin skin = new Skin(Gdx.files.internal("skin/neon-ui.json"));
+        //rules
+        rule = new Label("- How to Control a Snake :: by keyboard arrow keys (in 1vs1 mode, W, S, A, D keys also)", super.getSkin());
+        table.add(rule).pad(0,5,20,0).left();
+        table.row();
 
-        //label
-        title_L = new Label("Rule", skin);
+        rule = new Label("- When Eating an Item :: the score increases, but the snake’s length will also increase.", super.getSkin());
+        table.add(rule).pad(0,5,20,0).left();
+        table.row();
+
+        rule = new Label("- Game End :: When the snake collides with the border", super.getSkin());
+        table.add(rule).pad(0,5,7,0).left();
+        table.row();
+
+        rule = new Label("                    (in 1vs1 mode, when colliding with another snake also)", super.getSkin());
+        table.add(rule).pad(0,5,30,0).left();
+        table.row();
+
         //back button
-        final TextButton back_Bt = new TextButton("Back", skin);
+        final TextButton back_Bt = new TextButton("Back", super.getSkin());
         back_Bt.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                parent.changeScreen(Screen_Main.MENU_S);
+                s_main.changeScreen(Screen_Main.MENU_S);
             }
         });
-
-        //draw table
-        table.add(title_L);
-        table.row();
-        table.add(back_Bt).fillX().uniformX();
-    }
-
-    @Override
-    public void render(float delta) {
-        //clear the screen
-        Gdx.gl.glClearColor(0f, 0f, 0f, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        //let stage start draw
-        stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
-        stage.draw();
-    }
-
-    @Override
-    public void resize(int width, int height) {
-        stage.getViewport().update(width, height, true);
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void hide() {
-
-    }
-
-    @Override
-    public void dispose() {
-
+        table.add(back_Bt).size(100, 60).spaceBottom(10);
     }
 }
