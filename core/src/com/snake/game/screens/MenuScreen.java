@@ -5,21 +5,24 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.snake.game.Main;
 
 
-public class MenuScreen implements Screen {
+public class MenuScreen extends Screen_Abstract {
+    private Screen_Main s_main;
+    private Table table;
+    private Label title;
 
-    private Screen_Main parent; //main
-    private Stage stage; //controller
-
-    public MenuScreen(Screen_Main main){
-        parent = main;
-        stage = new Stage(new ScreenViewport()); //create stage as a controller
+    public MenuScreen(Main main, Screen_Main s_main){
+        super(main);
+        this.s_main = s_main;
     }
 
     public void startGame(){
@@ -28,52 +31,52 @@ public class MenuScreen implements Screen {
 
     @Override
     public void show() {
-        Gdx.input.setInputProcessor(stage);
+        if(table != null) table.clear();
+        super.show();
+        table = super.createTable();    //create a table
 
-        //create a table
-        Table table = new Table();
-        table.setFillParent(true);
-        table.setDebug(true);
-        stage.addActor(table);
-
-        //temporary skin
-        Skin skin = new Skin(Gdx.files.internal("skin/neon-ui.json"));
-
-        /* menu buttons */
-        TextButton play_Bt = new TextButton("Play", skin );
-        TextButton rule_Bt = new TextButton("Rules", skin);
-        TextButton highScore_Bt = new TextButton("High Scores", skin );
-        TextButton exit_Bt = new TextButton("Exit", skin );
-
-        //create buttons to table
-        table.add(play_Bt).fillX().uniformX();
-        table.row().pad(10, 0, 10, 0);
-        table.add(rule_Bt).fillX().uniformX();
+        //label
+        title = new Label("Snake Game", super.getSkin());
+        title.setFontScale(1.5f);
+        table.add(title).spaceBottom(20);
         table.row();
-        table.add(highScore_Bt).fillX().uniformX();
+
+        //buttons
+        TextButton play_Bt = new TextButton("Play Game", super.getSkin() );
+        table.add(play_Bt).size(250, 60).uniform().fill().spaceBottom(10);
         table.row();
-        table.add(exit_Bt).fillX().uniformX();
+
+        TextButton rule_Bt = new TextButton("Rules", super.getSkin());
+        table.add(rule_Bt).uniform().fill().spaceBottom(10);
+        table.row();
+
+        TextButton highScore_Bt = new TextButton("High Scores", super.getSkin() );
+        table.add(highScore_Bt).uniform().fill().spaceBottom(10);
+        table.row();
+
+        TextButton exit_Bt = new TextButton("Exit", super.getSkin() );
+        table.add(exit_Bt).size(100, 60).fill().spaceBottom(10);
 
         /* Button Listeners */
         //load Play Screen
         play_Bt.addListener( new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor){
-                parent.changeScreen(Screen_Main.PLAY_S);
+                s_main.changeScreen(Screen_Main.PLAY_S);
             }
         });
         //load Rule Screen
         rule_Bt.addListener( new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor){
-                parent.changeScreen(Screen_Main.RULE_S);
+                s_main.changeScreen(Screen_Main.RULE_S);
             }
         });
         //load Score Screen
         highScore_Bt.addListener( new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor){
-                parent.changeScreen(Screen_Main.SCORE_S);
+                s_main.changeScreen(Screen_Main.SCORE_S);
             }
         });
         //exit program
@@ -83,40 +86,5 @@ public class MenuScreen implements Screen {
                 Gdx.app.exit();
             }
         });
-    }
-
-    @Override
-    public void render(float delta) {
-        //clear the screen
-        Gdx.gl.glClearColor(0f, 0f, 0f, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        //let stage start draw
-        stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
-        stage.draw();
-    }
-
-    @Override
-    public void resize(int width, int height) {
-        stage.getViewport().update(width, height, true);
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void hide() {
-
-    }
-
-    @Override
-    public void dispose() {
-        stage.dispose();
     }
 }
