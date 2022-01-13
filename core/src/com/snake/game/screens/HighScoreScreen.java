@@ -1,10 +1,8 @@
 package com.snake.game.screens;
 
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.snake.game.Main;
 
 public class HighScoreScreen extends Screen_Abstract {
@@ -13,7 +11,7 @@ public class HighScoreScreen extends Screen_Abstract {
     private Label title;
 
     public HighScoreScreen(Main main, Screen_Main s_main){
-        super(main);
+        super(main, s_main);
         this.s_main = s_main;
     }
 
@@ -29,13 +27,7 @@ public class HighScoreScreen extends Screen_Abstract {
         table.row();
 
         //back button
-        final TextButton back_Bt = new TextButton("Back", super.getSkin());
-        back_Bt.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                s_main.changeScreen(Screen_Main.MENU_S);
-            }
-        });
+        final TextButton back_Bt = super.createBt("BACK", s_main.MENU_S);
         table.add(back_Bt).size(100, 60).fill();
     }
 }

@@ -1,11 +1,9 @@
 package com.snake.game.screens;
 
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.snake.game.Main;
 
 public class EndScreen extends Screen_Abstract {
@@ -14,11 +12,11 @@ public class EndScreen extends Screen_Abstract {
     private Label title;
     private TextField textField;
 
-    public int score = 999; //temporal score
+    public int score=999; //temporal score
     public String name = "AAA"; //temporal name
 
     public EndScreen(Main main, Screen_Main s_main){
-        super(main);
+        super(main, s_main);
         this.s_main = s_main;
     }
 
@@ -34,6 +32,7 @@ public class EndScreen extends Screen_Abstract {
         table.add(title).spaceBottom(20);
         table.row();
 
+
         title = new Label("Score : "+score, super.getSkin());
         table.add(title).spaceBottom(20);
         table.row();
@@ -46,14 +45,7 @@ public class EndScreen extends Screen_Abstract {
         table.row();
 
         //save button
-        final TextButton back_Bt = new TextButton("Save", super.getSkin());
-        back_Bt.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                s_main.changeScreen(Screen_Main.SCORE_S);
-            }
-        });
-        table.add(back_Bt).size(100, 60).fill().colspan(2);
-
+        final TextButton save_Bt = super.createBt("SAVE", s_main.SCORE_S);
+        table.add(save_Bt).size(100, 60).fill().colspan(2);
     }
 }

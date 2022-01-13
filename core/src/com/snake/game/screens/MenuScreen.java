@@ -1,17 +1,11 @@
 package com.snake.game.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.snake.game.Main;
 
 
@@ -21,7 +15,7 @@ public class MenuScreen extends Screen_Abstract {
     private Label title;
 
     public MenuScreen(Main main, Screen_Main s_main){
-        super(main);
+        super(main, s_main);
         this.s_main = s_main;
     }
 
@@ -41,50 +35,29 @@ public class MenuScreen extends Screen_Abstract {
         table.add(title).spaceBottom(20);
         table.row();
 
-        //buttons
-        TextButton play_Bt = new TextButton("Play Game", super.getSkin() );
+        //play button
+        final TextButton play_Bt = super.createBt("Play Game", s_main.PLAY_S);
         table.add(play_Bt).size(250, 60).uniform().fill().spaceBottom(10);
         table.row();
 
-        TextButton rule_Bt = new TextButton("Rules", super.getSkin());
+        //rule button
+        final TextButton rule_Bt = super.createBt("Rules", s_main.RULE_S);
         table.add(rule_Bt).uniform().fill().spaceBottom(10);
         table.row();
 
-        TextButton highScore_Bt = new TextButton("High Scores", super.getSkin() );
+        //high score button
+        final TextButton highScore_Bt = super.createBt("High Scores", s_main.SCORE_S);
         table.add(highScore_Bt).uniform().fill().spaceBottom(10);
         table.row();
 
+        //exit button
         TextButton exit_Bt = new TextButton("Exit", super.getSkin() );
-        table.add(exit_Bt).size(100, 60).fill().spaceBottom(10);
-
-        /* Button Listeners */
-        //load Play Screen
-        play_Bt.addListener( new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor){
-                s_main.changeScreen(Screen_Main.PLAY_S);
-            }
-        });
-        //load Rule Screen
-        rule_Bt.addListener( new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor){
-                s_main.changeScreen(Screen_Main.RULE_S);
-            }
-        });
-        //load Score Screen
-        highScore_Bt.addListener( new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor){
-                s_main.changeScreen(Screen_Main.SCORE_S);
-            }
-        });
-        //exit program
         exit_Bt.addListener( new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor){
                 Gdx.app.exit();
             }
         });
+        table.add(exit_Bt).size(100, 60).fill().spaceBottom(10);
     }
 }

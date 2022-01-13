@@ -1,10 +1,8 @@
 package com.snake.game.screens;
 
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.snake.game.Main;
 
 public class PlayScreen extends Screen_Abstract {
@@ -14,7 +12,7 @@ public class PlayScreen extends Screen_Abstract {
     private Label title;
 
     public PlayScreen(Main main, Screen_Main s_main){
-        super(main);
+        super(main, s_main);
         this.s_main = s_main;
     }
 
@@ -31,34 +29,16 @@ public class PlayScreen extends Screen_Abstract {
         table.row();
 
         //singleMode button
-        TextButton singleMode_Bt = new TextButton("Single Mode", super.getSkin());
-        singleMode_Bt.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                s_main.changeScreen(Screen_Main.GAME_S);
-            }
-        });
+        final TextButton singleMode_Bt = super.createBt("Single Mode", s_main.GAME_S);
         table.add(singleMode_Bt).size(250, 60).fill().spaceBottom(50);
 
         //multiMode button
-        TextButton multiMode_Bt = new TextButton("1 vs 1 Mode", super.getSkin());
-        multiMode_Bt.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                s_main.changeScreen(Screen_Main.GAME_S);
-            }
-        });
+        final TextButton multiMode_Bt = super.createBt("1 vs 1 Mode", s_main.GAME_S);
         table.add(multiMode_Bt).size(250, 60).fill().spaceBottom(50);
         table.row();
 
         //back button
-        final TextButton back_Bt = new TextButton("Back", super.getSkin());
-        back_Bt.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                s_main.changeScreen(Screen_Main.MENU_S);
-            }
-        });
+        final TextButton back_Bt = super.createBt("BACK", s_main.MENU_S);
         table.add(back_Bt).size(100, 60).fill().colspan(2);
     }
 }
