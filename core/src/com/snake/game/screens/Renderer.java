@@ -36,8 +36,8 @@ public class Renderer {
 
         // Drawing a snake
         shapeRenderer.setColor(Color.LIME);
-        for (int x = 1; x < gameScreen.rows - 1; x++) {
-            for (int y = 1; y < gameScreen.cols - 1; y++) {
+        for (int x = 0; x < gameScreen.rows - 1; x++) {
+            for (int y = 0; y < gameScreen.cols - 1; y++) {
                 if (gameScreen.cells[x][y].getState() == State.SNAKE )
                     shapeRenderer.rect(x * gameScreen.scl, y * gameScreen.scl, gameScreen.scl, gameScreen.scl);
                 else if (gameScreen.cells[x][y].getState() == State.ITEM)

@@ -13,7 +13,7 @@ public class Snake {
 
     public Snake(){//default, dont need specified cell
 
-        head = Cell(Board.getCols()/2,Board.getRows()/2);
+        //head = Cell(Board.getCols()/2,Board.getRows()/2);
         snakeCells.add(head);
         head.setState(State.SNAKE);
     }

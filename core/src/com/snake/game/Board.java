@@ -6,7 +6,7 @@ public class Board {
     final int COLS = 20;
     Random rand = new Random();
 
-    private Game m_game;
+    private Main m_game;
     private Player m_player1;
     private Player m_player2;
     private int m_mode;
@@ -22,7 +22,7 @@ public class Board {
         return COLS;
     }
 
-    public void startGame(Game game){
+    public void startGame(Main game){
         m_game = game;
         m_cells = new Cell[ROWS][COLS];
         //Here we create Matrix of Cells.
@@ -31,6 +31,7 @@ public class Board {
                 m_cells[row][column] = new Cell(row, column);
             }
         }
+        m_cells[3][3].setState(State.SNAKE);
         //Now we generate the 1st item of the game.
         createItem();
     }
@@ -40,11 +41,10 @@ public class Board {
         boolean free = false;
         int row = -1;
         int col = -1;
-        State temp;
+        State temp = State.FREE;
         while (!free) {
             row = rand.nextInt(ROWS);
             col = rand.nextInt(COLS);
-            temp = State.FREE;
             if (m_cells[row][col].getState() == temp){
                 free = true;
             }
@@ -63,8 +63,8 @@ public class Board {
             }
         }
         m_item = tempItem; //Since there is only one item on the board, the class Board will have it. But the cell itself will know where the item is.
-        State aux = State.ITEM;
-        m_cells[row][col].setState(aux);
+        m_cells[row][col].setState(State.ITEM);
+        m_cells[row][col].setItem(m_item);
     }
 
     public void setHighscore(int highscore){ //this class will be called by  the class Player when the highscore if the class changes.

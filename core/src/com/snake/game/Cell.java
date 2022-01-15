@@ -3,10 +3,12 @@ package com.snake.game;
 public class Cell {
     private int x, y;
     private State state; //what is inside the cell
+    private Item m_item;
 
     public Cell(int x, int y){
         this.x = x;
         this.y = y;
+        this.setState(State.FREE);
     }
 
     public State getState(){
@@ -25,9 +27,10 @@ public class Cell {
         return y;
     }
 
-  /* public enum State {
-        FREE,
-        SNAKE,
-        ITEM
-    }*/
+    public void setItem(Item item){
+        m_item = item;
+    }
+    public void deleteItem(){ //TODO:
+
+    }
 }

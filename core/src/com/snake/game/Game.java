@@ -1,4 +1,4 @@
-package com.snake.game;
+/*package com.snake.game;
 
 import com.snake.game.screens.MenuScreen;
 
@@ -21,6 +21,7 @@ public class Game {
     /* Since we have to see the highscore in real time, instead of the screen asking for the highscore, the class
         board will call the function setHighscore from the main so this one sends the order to the class Screen with
         the new value of the highscore.*/
+/*
     void setHighscore(int highscore){
         m_screen.setHighscore(highscore);
     }
@@ -30,3 +31,4 @@ public class Game {
     }
 
 }
+*/

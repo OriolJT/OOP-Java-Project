@@ -20,7 +20,7 @@ public class GameScreen extends Screen_Abstract {
     public int rows = 20;
     public int cols = 20;
     public int scl = Gdx.graphics.getWidth()/cols;
-    public Game game;
+    public Main game;
     Texture texture = new Texture(Gdx.files.internal("apple.png"));
     public int score = 999; //temporal score
 
@@ -36,12 +36,13 @@ public class GameScreen extends Screen_Abstract {
     public GameScreen(Main main, Screen_Main s_main) {
         super(main, s_main);
         this.s_main = s_main;
-
+        this.cells = s_main.main.getCells();
         //cell
-        this.cells = new Cell[rows][cols];
+        //this.cells = new Cell[rows][cols];
         //snake =
         renderer = new Renderer(this);
 
+        /*
         //initialize
         for (int row = 0; row < rows; row++) {
             for (int column = 0; column < cols; column++) {
@@ -66,7 +67,9 @@ public class GameScreen extends Screen_Abstract {
                 if (cells[x][y].getState() == State.ITEM)
                     apple.setPosition(x*32, y*32);
             }
-        }
+        }*/
+        Image apple = new Image(texture);
+
         stage.addActor(apple);
     }
 
