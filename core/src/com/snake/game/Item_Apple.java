@@ -9,7 +9,7 @@ public class Item_Apple extends Item{
     private Image img;
     private final String apple = "Apple";
     //point == Spawnrate
-    private final int point = 1;
+    public final int point = 1;
 
     Item_Apple(){
         super();
@@ -26,4 +26,5 @@ public class Item_Apple extends Item{
     public int addToScore(int score, int multiplier){
         return score+(multiplier*point);
     }
+
 }

@@ -1,5 +1,8 @@
 package com.snake.game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
+
 import java.sql.Date;
 import java.sql.Time;
 
@@ -8,6 +11,7 @@ public class Highscore {
     private Date date;
     private Time time;
     private int score;
+    Preferences prefs = Gdx.app.getPreferences("My Highscores");
 
     public Highscore(){
         this.name = "";
@@ -41,5 +45,10 @@ public class Highscore {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public void addHighscore(Highscore highscore){
+        prefs.putInteger(highscore.getName(), highscore.getScore());
+        prefs.flush();
     }
 }

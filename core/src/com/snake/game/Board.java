@@ -6,13 +6,24 @@ public class Board {
     final int COLS = 20;
     Random rand = new Random();
 
+
     private Main m_game;
     private Player m_player1;
     private Player m_player2;
     private int m_mode;
     private Cell[][] m_cells;
     private Item m_item;
+    public int board_score1;
+    public int board_score2;
 
+
+    public int getBoard_score1(){
+        return board_score1;
+    }
+
+    public int getBoard_score2(){
+        return board_score2;
+    }
 
     public int getRows(){
         return ROWS;
