@@ -31,7 +31,7 @@ public class Board {
                 m_cells[row][column] = new Cell(row, column);
             }
         }
-        m_cells[3][3].setState(State.SNAKE);
+        m_cells[3][3].setState(State.SNAKE); //TODO: DELETE THIS LINE SINCE ITS JUST TO TEST
         //Now we generate the 1st item of the game.
         createItem();
     }
