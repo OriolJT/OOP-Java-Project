@@ -34,14 +34,22 @@ public class Renderer {
         shapeRenderer.rect(gameScreen.scl, 0, Gdx.graphics.getWidth() - gameScreen.scl, gameScreen.scl);
         shapeRenderer.rect(gameScreen.scl, Gdx.graphics.getHeight() - gameScreen.scl, Gdx.graphics.getWidth() - gameScreen.scl, gameScreen.scl);
 
-        // Drawing a snake
-        shapeRenderer.setColor(Color.LIME);
         for (int x = 0; x < gameScreen.rows - 1; x++) {
             for (int y = 0; y < gameScreen.cols - 1; y++) {
-                if (gameScreen.cells[x][y].getState() == State.SNAKE )
+                // Draw a snake
+                if (gameScreen.cells[x][y].getState() == State.SNAKE ) {
+                    shapeRenderer.setColor(Color.LIME);
                     shapeRenderer.rect(x * gameScreen.scl, y * gameScreen.scl, gameScreen.scl, gameScreen.scl);
-                else if (gameScreen.cells[x][y].getState() == State.ITEM)
-                    apple.setPosition(x*10, y*10);
+                }
+                /*
+                // Draw items as a filled Cell (not image)
+                else if(gameScreen.cells[x][y].getState() == State.ITEM) {
+                    shapeRenderer.setColor(Color.RED);
+                    shapeRenderer.rect(x * gameScreen.scl, y * gameScreen.scl, gameScreen.scl, gameScreen.scl);
+                    //banana
+                    //kiwi
+                }
+                */
             }
         }
         shapeRenderer.end();
