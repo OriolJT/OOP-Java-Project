@@ -29,6 +29,7 @@ public class HighScoreScreen extends Screen_Abstract {
 
         //label
         title = new Label("High Scores", super.getSkin());
+        title.setFontScale(2f);
         table.add(title).spaceBottom(20);
         table.row();
         
@@ -55,8 +56,8 @@ public class HighScoreScreen extends Screen_Abstract {
             if(h==null){
                 break;
             }
-            table.add(prefs.getString(h.getName())).left();
-            table.add(prefs.getString(h.getName().concat("str"))).right();
+            table.add(prefs.getString(h.getName())).left().size(1.5f).pad(0,5,30,0);
+            table.add(prefs.getString(h.getName().concat("str"))).right().size(1.5f).pad(0,5,30,0);
             table.row();
         }
         /*

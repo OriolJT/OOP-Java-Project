@@ -31,27 +31,27 @@ public class MenuScreen extends Screen_Abstract {
 
         //label
         title = new Label("Snake Game", super.getSkin());
-        title.setFontScale(1.5f);
-        table.add(title).spaceBottom(20);
+        title.setFontScale(2f);
+        table.add(title).spaceBottom(25);
         table.row();
 
         //play button
-        final TextButton play_Bt = super.createBt("Play Game", s_main.PLAY_S);
-        table.add(play_Bt).size(250, 60).uniform().fill().spaceBottom(10);
+        final TextButton play_Bt = super.createBt("PLAY", s_main.PLAY_S);
+        table.add(play_Bt).size(400, 70).fillX().uniform().spaceBottom(15);
         table.row();
 
         //rule button
-        final TextButton rule_Bt = super.createBt("Rules", s_main.RULE_S);
-        table.add(rule_Bt).uniform().fill().spaceBottom(10);
+        final TextButton rule_Bt = super.createBt("RULE", s_main.RULE_S);
+        table.add(rule_Bt).uniform().fill().spaceBottom(15);
         table.row();
 
         //high score button
-        final TextButton highScore_Bt = super.createBt("High Scores", s_main.SCORE_S);
+        final TextButton highScore_Bt = super.createBt("HIGH SCORES", s_main.SCORE_S);
         table.add(highScore_Bt).uniform().fill().spaceBottom(10);
         table.row();
 
         //exit button
-        TextButton exit_Bt = new TextButton("Exit", super.getSkin() );
+        TextButton exit_Bt = new TextButton("EXIT", super.getSkin() );
         exit_Bt.addListener( new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor){

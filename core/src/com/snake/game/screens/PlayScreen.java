@@ -24,17 +24,17 @@ public class PlayScreen extends Screen_Abstract {
 
         //label
         title = new Label("Choose a Game Mode", super.getSkin());
-        title.setFontScale(1.5f);
+        title.setFontScale(2f);
         table.add(title).spaceBottom(30).colspan(2);
         table.row();
 
         //singleMode button
         final TextButton singleMode_Bt = super.createBt("Single Mode", s_main.GAME_S);
-        table.add(singleMode_Bt).size(250, 60).fill().spaceBottom(50);
+        table.add(singleMode_Bt).size(300, 70).fill().spaceBottom(50).spaceRight(10);
 
         //multiMode button
         final TextButton multiMode_Bt = super.createBt("1 vs 1 Mode", s_main.GAME_S);
-        table.add(multiMode_Bt).size(250, 60).fill().spaceBottom(50);
+        table.add(multiMode_Bt).size(300, 70).fill().spaceBottom(50);
         table.row();
 
         //back button

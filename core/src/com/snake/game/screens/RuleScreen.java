@@ -23,25 +23,29 @@ public class RuleScreen extends Screen_Abstract {
 
         //title label
         title = new Label("Game Rules", super.getSkin());
-        title.setFontScale(1.5f);
+        title.setFontScale(2f);
         table.add(title).center().spaceBottom(30);
         table.row();
 
         //rules
         rule = new Label("- How to Control a Snake :: by keyboard arrow keys (in 1vs1 mode, W, S, A, D keys also)", super.getSkin());
+        rule.setFontScale(1.2f);
         table.add(rule).pad(0,5,20,0).left();
         table.row();
 
         rule = new Label("- When Eating an Item :: the score increases, but the snake’s length will also increase.", super.getSkin());
         table.add(rule).pad(0,5,20,0).left();
+        rule.setFontScale(1.2f);
         table.row();
 
         rule = new Label("- Game End :: When the snake collides with the border", super.getSkin());
         table.add(rule).pad(0,5,7,0).left();
+        rule.setFontScale(1.2f);
         table.row();
 
         rule = new Label("                    (in 1vs1 mode, when colliding with another snake also)", super.getSkin());
         table.add(rule).pad(0,5,30,0).left();
+        rule.setFontScale(1.2f);
         table.row();
 
         //back button

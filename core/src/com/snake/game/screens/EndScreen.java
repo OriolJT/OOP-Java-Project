@@ -12,7 +12,6 @@ public class EndScreen extends Screen_Abstract {
     private Label title;
     private TextField textField;
 
-    public int score=999; //temporal score
     public String name = "AAA"; //temporal name
 
     public EndScreen(Main main, Screen_Main s_main){
@@ -28,20 +27,23 @@ public class EndScreen extends Screen_Abstract {
 
         //label
         title = new Label("Game End", super.getSkin());
-        title.setFontScale(1.5f);
-        table.add(title).spaceBottom(20);
+        title.setFontScale(2f);
+        table.add(title).spaceBottom(40);
         table.row();
 
 
-        title = new Label("Score : "+score, super.getSkin());
+        title = new Label("Score : "+main.m_board.getBoard_score1(), super.getSkin());
+        title.setFontScale(1.2f);
         table.add(title).spaceBottom(20);
         table.row();
 
         title = new Label("Name : ", super.getSkin());
+        title.setFontScale(1.2f);
         table.add(title).spaceBottom(20);
 
         //incomplete ,,,
         textField = new TextField("Name: ", super.getSkin());
+        title.setFontScale(1.2f);
         table.row();
 
         //save button
