@@ -9,7 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.badlogic.gdx.utils.viewport.*;
 import com.snake.game.Main;
 
 
@@ -20,11 +20,13 @@ public class Screen_Abstract implements Screen {
 
     private Table table;
     private Skin skin;
+    private Viewport viewport;
 
     protected Screen_Abstract(Main main,Screen_Main s_main){
         this.main = main;
         this.s_main = s_main;
-        this.stage = new Stage(new StretchViewport(700,500));
+        this.viewport = new StretchViewport(900, 900);
+        this.stage = new Stage(viewport);
     }
 
     protected Table createTable(){
