@@ -19,7 +19,7 @@ public class Main extends Game {
         super.render();
     }
 
-    private Board m_board;
+    public Board m_board;
     private Screen m_screen;
    // private MenuScreen m_menu;
 

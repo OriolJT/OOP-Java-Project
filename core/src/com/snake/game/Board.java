@@ -2,8 +2,8 @@ package com.snake.game;
 import java.util.Random;
 
 public class Board {
-    final int ROWS = 20; //this is a temporal number.
-    final int COLS = 20;
+    private final int ROWS = 30; //this is a temporal number.
+    private final int COLS = 30;
     Random rand = new Random();
 
 
@@ -13,8 +13,9 @@ public class Board {
     private int m_mode;
     private Cell[][] m_cells;
     private Item m_item;
-    public int board_score1;
-    public int board_score2;
+    public int board_score1 = 777; //temporal score
+    public int board_score2 = 666; //temporal score
+    public int tempItemNum;
 
 
     public int getBoard_score1(){
@@ -43,11 +44,13 @@ public class Board {
             }
         }
         m_cells[3][3].setState(State.SNAKE); //TODO: DELETE THIS LINE SINCE ITS JUST TO TEST
+        m_cells[4][3].setState(State.SNAKE); //TODO: DELETE THIS LINE SINCE ITS JUST TO TEST
+        m_cells[5][3].setState(State.SNAKE); //TODO: DELETE THIS LINE SINCE ITS JUST TO TEST
         //Now we generate the 1st item of the game.
-        createItem();
+        tempItemNum = createItem();
     }
 
-    private void createItem(){ //This function can only be called when there is not another item on the board.
+    private int createItem(){ //This function can only be called when there is not another item on the board.
         //We create the item making sure that there is not a snake in that posisiton.
         boolean free = false;
         int row = -1;
@@ -61,23 +64,26 @@ public class Board {
             }
         }
 
-        int itemNumber = rand.nextInt(2);
-        Item tempItem;
+        int itemNumber = rand.nextInt(3);
+
+        Item tempItem = null;
         if(itemNumber == 0){
             tempItem = new Item_Apple();
         }
         else {
             if (itemNumber == 1) {
                 tempItem = new Item_Banana();
-            } else {
+            } else if (itemNumber == 2) {
                 tempItem = new Item_Kiwi();
             }
         }
         m_item = tempItem; //Since there is only one item on the board, the class Board will have it. But the cell itself will know where the item is.
         m_cells[row][col].setState(State.ITEM);
         m_cells[row][col].setItem(m_item);
+        
+        return itemNumber;
     }
-
+    
     public void setHighscore(int highscore){ //this class will be called by  the class Player when the highscore if the class changes.
         m_game.setHighscore(highscore);
     }
