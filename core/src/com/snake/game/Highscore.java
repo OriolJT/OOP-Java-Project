@@ -47,8 +47,10 @@ public class Highscore {
         this.score = score;
     }
 
-    public void addHighscore(Highscore highscore){
-        prefs.putInteger(highscore.getName(), highscore.getScore());
+    public void saveHighscore(){
+        prefs.putInteger(this.getName(), this.getScore());
+        prefs.putString(this.getName().concat("str"), this.getName());
         prefs.flush();
+        System.out.println(prefs.get().values());
     }
 }

@@ -1,23 +1,27 @@
 package com.snake.game;
 
 public class HighscoreList {
-    private final int  list_number = 20;
-    private Highscore [] list;
-    private int i=0;
+    public final int  list_number = 10;
+    public Highscore [] list;
 
+    public Highscore[] getList(){
+        return this.list;
+    }
     public HighscoreList(){
         list = new Highscore[list_number];
     }
     public HighscoreList(Highscore[] hs_l){
         list = new Highscore[list_number];
-        while(i!=20){
+        int i =0;
+        while(i!=10){
             list[i]=hs_l[i];
             i++;
         }
         i=0;
     }
-    private void deleteHighscore(int rank){
-        while(i!=rank){
+    public void deleteHighscore(String name){
+        int i=0;
+        while(!list[i].getName().equals(name)){
             i++;
         }
         list[i] = list[i+1];
@@ -26,17 +30,19 @@ public class HighscoreList {
         }
         i=0;
     }
-    private void addHighscore(Highscore h){
-        Highscore p;
-        while(list[i].getScore()>h.getScore()){
-            i++;
+    public void addHighscore(Highscore h) {
+        int i = 0;
+        Highscore p=list[i];
+        Highscore p2=null;
+        while(list[i]!=null) {
+            if (list[i].getScore()< h.getScore()) {
+                p = list[i];
+                p2 = list[i + 1];
+                break;
+            }i++;
         }
-        p=list[i+1];
-        list[i+1]=list[i];
         list[i]=h;
-        while(i!=20){
-            list[i]=p;
-            p=list[i+1];
-        }
+        list[i+1]=p;
+        list[i+2]=p2;
     }
 }
