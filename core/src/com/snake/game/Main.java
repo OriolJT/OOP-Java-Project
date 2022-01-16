@@ -19,9 +19,8 @@ public class Main extends Game {
         super.render();
     }
 
-    private Board m_board;
+    public Board m_board;
     private Screen m_screen;
-   // private MenuScreen m_menu;
 
     public void startGame(int mode){ //main will call this function
         m_board = new Board();
