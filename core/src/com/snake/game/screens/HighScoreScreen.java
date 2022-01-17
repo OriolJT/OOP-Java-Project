@@ -50,8 +50,6 @@ public class HighScoreScreen extends Screen_Abstract {
         table.add(title).center().spaceBottom(30).spaceLeft(20);
         table.row();
 
-        prefs.clear();
-
         Timestamp ts = new Timestamp(System.currentTimeMillis());
         String date = new Date(ts.getTime()).toString();
         Highscore highscore = new Highscore();
@@ -137,6 +135,8 @@ public class HighScoreScreen extends Screen_Abstract {
             //adds Timestamp TODO needs to be aligned for the table
             table.add(prefs.getString("Date".concat(Integer.toString(i)))).fillX().spaceBottom(25).spaceLeft(70);
             table.row();
+
+
 
         }
         /*

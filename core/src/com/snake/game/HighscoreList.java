@@ -25,6 +25,7 @@ public class HighscoreList {
             list[i] = h;
         }
     }
+
     public HighscoreList(Highscore[] hs_l){
         list = new Highscore[list_number];
         int i =0;
@@ -45,6 +46,13 @@ public class HighscoreList {
         }
         i=0;
     }
+    public void deleteHighscores(){
+        int i=0;
+        while(i<list_number){
+            list[i]=null;
+            i++;
+        }
+    }
     public int getIndex(Highscore highscore){
         int i = 0;
         while (i<list_number) {
@@ -61,26 +69,35 @@ public class HighscoreList {
             System.out.print(list[i].getName());
         }
     }
+    public void insertHighscorePos(int pos){
+
+    }
     public void insertHighscore(Highscore highscore) {
             int i = 0;
+            int index=0;
             Highscore p = null;
             if(list[0]==null){
                 list[0]=highscore;
                 return;
             }
-            while(i<list_number) {
-                if (list[i].getScore()< highscore.getScore()) {
-                    p = list[i];
-                    list[i]=highscore;
-                    return;
-                }i++;
-            }
-            if(i+1<list_number){
-                return;
-            }
-            while(i+1<list_number){
-                list[i+1]=list[i];
+            while(i!=10&&list[i].getScore()>highscore.getScore()) {
                 i++;
+                index=i;
+            }
+            System.out.println(Integer.toString(index).concat("Test"));
+            Highscore[] highscoreList = new Highscore[11];
+
+            for(int k=0;k<index;k++){
+                highscoreList[k]=list[k];
+                System.out.println(Integer.toString(index).concat(" Erste For Schleife"));
+            }
+            highscoreList[index]=highscore;
+            for(int j=index;j<list_number;j++){
+                highscoreList[j+1]=list[j];
+                System.out.println(Integer.toString(index).concat(" Zweite For Schleife"));
+            }
+            for(int l=0;l<list_number;l++){
+                list[l]=highscoreList[l];
             }
     }
 }
