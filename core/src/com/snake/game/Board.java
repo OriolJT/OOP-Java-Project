@@ -46,6 +46,13 @@ public class Board {
         m_cells[3][3].setState(State.SNAKE); //TODO: DELETE THIS LINE SINCE ITS JUST TO TEST
         m_cells[4][3].setState(State.SNAKE); //TODO: DELETE THIS LINE SINCE ITS JUST TO TEST
         m_cells[5][3].setState(State.SNAKE); //TODO: DELETE THIS LINE SINCE ITS JUST TO TEST
+
+        if(m_game.m_screen.playScreen.getGameMode() ==2) {
+            m_cells[26][12].setState(State.SNAKE2); //TODO: DELETE THIS LINE SINCE ITS JUST TO TEST
+            m_cells[27][12].setState(State.SNAKE2); //TODO: DELETE THIS LINE SINCE ITS JUST TO TEST
+            m_cells[28][12].setState(State.SNAKE2); //TODO: DELETE THIS LINE SINCE ITS JUST TO TEST
+        }
+
         //Now we generate the 1st item of the game.
         tempItemNum = createItem();
     }

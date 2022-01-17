@@ -37,15 +37,10 @@ public class Renderer {
                     shapeRenderer.setColor(Color.LIME);
                     shapeRenderer.rect(x * GS.RowNCol, y * GS.RowNCol, GS.RowNCol, GS.RowNCol);
                 }
-                /*
-                // Draw items as a filled Cell (not image)
-                else if(gameScreen.cells[x][y].getState() == State.ITEM) {
-                    shapeRenderer.setColor(Color.RED);
-                    shapeRenderer.rect(x * gameScreen.scl, y * gameScreen.scl, gameScreen.scl, gameScreen.scl);
-                    //banana
-                    //kiwi
+                if (GS.cells[x][y].getState() == State.SNAKE2 ) {
+                    shapeRenderer.setColor(Color.YELLOW);
+                    shapeRenderer.rect(x * GS.RowNCol, y * GS.RowNCol, GS.RowNCol, GS.RowNCol);
                 }
-                */
             }
         }
         shapeRenderer.end();

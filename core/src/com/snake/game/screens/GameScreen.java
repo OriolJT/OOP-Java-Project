@@ -18,7 +18,7 @@ public class GameScreen extends Screen_Abstract {
     public Cell[][] cells;
     protected int RowNCol = 30;
     private int itemNum;
-    public int score = 999; //temporal score
+    public int score1, score2;
 
     Texture texture_a = new Texture(Gdx.files.internal("apple.png"));
     Image apple = new Image(texture_a);
@@ -35,32 +35,35 @@ public class GameScreen extends Screen_Abstract {
         renderer = new Renderer(this);
 
         // Draw items as an image
+        drawItem();
+    }
+
+    public void drawItem(){
         for (int x = 1; x < RowNCol - 1; x++) {
             for (int y = 1; y < RowNCol - 1; y++) {
+
                 if (cells[x][y].getState() == State.ITEM) {
                     itemNum = main.m_board.tempItemNum;
-                    drawItem(x, y, itemNum);
+
+                    switch (itemNum) {
+                        case 0: //apple
+                            apple.setPosition(x * RowNCol, y * RowNCol);
+                            stage.addActor(apple);
+                            break;
+                        case 1: //banana
+                            banana.setPosition(x * RowNCol, y * RowNCol);
+                            stage.addActor(banana);
+                            break;
+                        case 2: //kiwi
+                            kiwi.setPosition(x * RowNCol, y * RowNCol);
+                            stage.addActor(kiwi);
+                            break;
+                    }
                 }
             }
         }
     }
 
-    public void drawItem(int x, int y, int itemNum) {
-        switch (itemNum) {
-            case 0: //apple
-                apple.setPosition(x * RowNCol, y * RowNCol);
-                stage.addActor(apple);
-                break;
-            case 1: //banana
-                banana.setPosition(x * RowNCol, y * RowNCol);
-                stage.addActor(banana);
-                break;
-            case 2: //kiwi
-                kiwi.setPosition(x * RowNCol, y * RowNCol);
-                stage.addActor(kiwi);
-                break;
-        }
-    }
 
     @Override
     public void show() {
@@ -74,10 +77,23 @@ public class GameScreen extends Screen_Abstract {
         table.add(back_Bt).size(80, 60).pad(10,40,0,0).top().fill();
 
         //label
-        score = main.m_board.getBoard_score1();
-        title = new Label("Score: "+score, super.getSkin());
-        title.setFontScale(1.5f);
-        table.add(title).pad(30,280,0,0).top().expand().fillX();
+        if(s_main.playScreen.modeFlag == 2){
+            score1 = main.m_board.getBoard_score1();
+            title = new Label("Player 1 : "+score1, super.getSkin());
+            title.setFontScale(1.5f);
+            table.add(title).pad(30,100,0,0).top().expand().fillX();
+
+            score2 = main.m_board.getBoard_score2();
+            title = new Label("Player 2 : "+score2, super.getSkin());
+            title.setFontScale(1.5f);
+            table.add(title).pad(30,40,0,0).top().expand().fillX();
+        }
+        else {
+            score1 = main.m_board.getBoard_score1();
+            title = new Label("Score: " + score1, super.getSkin());
+            title.setFontScale(1.5f);
+            table.add(title).pad(30, 280, 0, 0).top().expand().fillX();
+        }
 
         //exit button
         final TextButton exit_Bt = super.createBt("EXIT", s_main.END_S);

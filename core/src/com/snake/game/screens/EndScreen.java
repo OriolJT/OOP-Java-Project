@@ -31,11 +31,28 @@ public class EndScreen extends Screen_Abstract {
         table.add(title).spaceBottom(40);
         table.row();
 
+        if(s_main.playScreen.modeFlag == 2){
+            title = new Label("Player 1 : " + main.m_board.getBoard_score1(), super.getSkin());
+            title.setFontScale(1.2f);
+            table.add(title).spaceBottom(20);
+            table.row();
 
-        title = new Label("Score : "+main.m_board.getBoard_score1(), super.getSkin());
-        title.setFontScale(1.2f);
-        table.add(title).spaceBottom(20);
-        table.row();
+            title = new Label("Name : ", super.getSkin());
+            title.setFontScale(1.2f);
+            table.add(title).spaceBottom(20);
+            table.row();
+
+            title = new Label("Player 2 : " + main.m_board.getBoard_score2(), super.getSkin());
+            title.setFontScale(1.2f);
+            table.add(title).pad(20,0,20,0);
+            table.row();
+        }
+        else {
+            title = new Label("Score : " + main.m_board.getBoard_score1(), super.getSkin());
+            title.setFontScale(1.2f);
+            table.add(title).spaceBottom(20);
+            table.row();
+        }
 
         title = new Label("Name : ", super.getSkin());
         title.setFontScale(1.2f);
