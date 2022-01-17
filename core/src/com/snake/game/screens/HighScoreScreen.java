@@ -33,12 +33,21 @@ public class HighScoreScreen extends Screen_Abstract {
         //label
         title = new Label("High Scores", super.getSkin());
         title.setFontScale(2f);
-        table.add(title).spaceBottom(20);
+        table.add(title).spaceBottom(40).colspan(3);
         table.row();
 
         // Column Labels TODO still needs Timestamp as label
-        table.add("Scores").left().size(1.5f).pad(0,5,30,0);
-        table.add("Names").left().size(1.5f).pad(0,5,30,0);
+        title = new Label("Score", super.getSkin());
+        title.setFontScale(1.2f);
+        table.add(title).center().pad(0,0,30,80);
+
+        title = new Label("Name", super.getSkin());
+        title.setFontScale(1.2f);
+        table.add(title).center().spaceBottom(30);
+
+        title = new Label("Date", super.getSkin());
+        title.setFontScale(1.2f);
+        table.add(title).center().spaceBottom(30).spaceLeft(20);
         table.row();
 
         prefs.clear();
@@ -122,13 +131,12 @@ public class HighScoreScreen extends Screen_Abstract {
             highscoreList.list[i].saveHighscore(highscoreList,i);
         }
         for (int i = 0; i<highscoreList.list_number;i++){
-            table.add(prefs.getString(Integer.toString(i))).left().size(1.5f).pad(0,10,30,0);
-            table.add(prefs.getString("Player".concat(Integer.toString(i)))).right().size(1.5f).pad(0,5,30,0);
-            table.row();
-
+            table.add(prefs.getString(Integer.toString(i))).fillX().pad(0,15,25,60);
+            table.add(prefs.getString("Player".concat(Integer.toString(i)))).fillX().spaceBottom(25);
 
             //adds Timestamp TODO needs to be aligned for the table
-            table.add(prefs.getString("Date".concat(Integer.toString(i))));
+            table.add(prefs.getString("Date".concat(Integer.toString(i)))).fillX().spaceBottom(25).spaceLeft(70);
+            table.row();
 
         }
         /*
@@ -151,6 +159,6 @@ public class HighScoreScreen extends Screen_Abstract {
          */
         //back button
         final TextButton back_Bt = super.createBt("BACK", s_main.MENU_S);
-        table.add(back_Bt).size(100, 60).fill();
+        table.add(back_Bt).size(100, 60).fill().colspan(3);
     }
 }
