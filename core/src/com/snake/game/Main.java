@@ -2,15 +2,18 @@ package com.snake.game;
 
 import com.badlogic.gdx.Game;
 import com.snake.game.screens.*;
-import com.snake.game.screens.MenuScreen;
 
 public class Main extends Game {
+    public Board m_board;
+    public Screen_Main m_screen;
+
     @Override
     public void create() {
         InitialScreen initialScreen;
 
         //Init Screen
-        initialScreen = new InitialScreen(new Screen_Main(this));
+        m_screen = new Screen_Main(this);
+        initialScreen = new InitialScreen(m_screen);
         setScreen(initialScreen);
     }
 
@@ -19,17 +22,11 @@ public class Main extends Game {
         super.render();
     }
 
-    public Board m_board;
-    private Screen m_screen;
-   // private MenuScreen m_menu;
-
     public void startGame(int mode){ //main will call this function
         m_board = new Board();
         m_board.gameMode(mode);
-        m_screen = new Screen();
         m_board.startGame(this);
         m_screen.startGame();
-       // m_menu.startGame();
     }
 
     /* Since we have to see the highscore in real time, instead of the screen asking for the highscore, the class

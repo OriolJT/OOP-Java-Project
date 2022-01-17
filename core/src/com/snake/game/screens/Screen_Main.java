@@ -9,6 +9,14 @@ public class Screen_Main {
         this.main = main;
     }
 
+    public void startGame(){
+
+    }
+
+    public void setHighscore(int highscore){
+
+    }
+
     //Screens
     public  MenuScreen menuScreen;              // menu: 0
     public  PlayScreen playScreen;              // play: 1
