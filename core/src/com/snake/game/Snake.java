@@ -3,6 +3,7 @@ package com.snake.game;
 import java.awt.event.KeyEvent;
 import java.util.LinkedList;
 import com.snake.game.Board;
+import org.jetbrains.annotations.NotNull;
 
 public class Snake {
 
@@ -52,7 +53,7 @@ public class Snake {
                 break;
         }
 
-        Cell nextCell(x,y);
+        Cell nextCell = new Cell(x,y);
         return nextCell;
     }
 
@@ -65,10 +66,9 @@ public class Snake {
         snakeCells.addFirst(head);
 
     }
-    //create void movement with just direction
 
     //newCell MUST BE a valid option to move (col+-1, row+-1) and inside the board
-    public boolean Crash(Cell newCell)
+    public boolean Crash(@NotNull Cell newCell)
     {
         if(newCell.getState() == State.FREE) {
             return false;
