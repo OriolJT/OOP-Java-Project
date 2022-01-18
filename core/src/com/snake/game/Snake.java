@@ -68,14 +68,24 @@ public class Snake {
     }
 
     //newCell MUST BE a valid option to move (col+-1, row+-1) and inside the board
-    public boolean Crash(@NotNull Cell newCell)
+    public int Crash(@NotNull Cell newCell)
     {
-        if(newCell.getState() == State.FREE) {
-            return false;
-        }else if(newCell.getState() == State.ITEM){
-            return false;
-        }else return true; //the only option left is another snake
-
+        int aux =-1;
+        switch(newCell.getState()){
+            case FREE:
+                aux = 0;
+                break;
+            case ITEM:
+                aux = 1;
+                break;
+            case SNAKE:
+                aux = 2;
+                break;
+            case SNAKE2:
+                aux = 2;
+                break;
+        }
+        return aux;
     }
 
     public LinkedList<Cell> getSnakeCells()
