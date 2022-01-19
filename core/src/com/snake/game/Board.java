@@ -64,8 +64,8 @@ public class Board {
         int col = -1;
         State temp = State.FREE;
         while (!free) {
-            row = rand.nextInt(ROWS);
-            col = rand.nextInt(COLS);
+            row = rand.nextInt(ROWS-2)+1; //1 to 28
+            col = rand.nextInt(COLS-3)+1; //1 to 27 (because of buttons)
             if (m_cells[row][col].getState() == temp){
                 free = true;
             }
