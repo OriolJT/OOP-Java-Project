@@ -9,12 +9,9 @@ public class Main extends Game {
 
     @Override
     public void create() {
-        InitialScreen initialScreen;
-
-        //Init Screen
+        //Init Screen as menuScreen
         m_screen = new Screen_Main(this);
-        initialScreen = new InitialScreen(m_screen);
-        setScreen(initialScreen);
+        setScreen(new MenuScreen(this, m_screen));
     }
 
     @Override
