@@ -2,7 +2,7 @@ package com.snake.game.screens;
 
 import com.snake.game.Main;
 
-public class Screen_Main {
+public class Screen_Main extends Thread{
     public Main main;
 
     public Screen_Main(Main main){
@@ -56,8 +56,10 @@ public class Screen_Main {
                 main.setScreen(endScreen);
                 break;
             case GAME_S:
-                main.startGame(1);
-                if (gameScreen == null) gameScreen = new GameScreen(main,this);
+                if(playScreen.modeFlag ==1) main.startGame(1);
+                else if(playScreen.modeFlag ==2) main.startGame(2);
+
+                gameScreen = new GameScreen(main,this);
                 main.setScreen(gameScreen);
                 break;
         }
