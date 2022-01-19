@@ -17,7 +17,7 @@ public class HighscoreList {
     //takes Information from my Preferences and creates a ArrayList
     public HighscoreList() {
         ArrayList<Highscore> highscoreArrayList = new ArrayList<>(list_number);
-        for(int i = 0; i<highscoreArrayList.size()-1;i++){
+        for(int i = 0; i<list_number-1;i++){
             Highscore h = new Highscore();
             h.setName(prefs.getString("Player".concat(Integer.toString(i)),"Default"));
             h.setScore(prefs.getInteger(Integer.toString(i),0));
@@ -28,26 +28,24 @@ public class HighscoreList {
 
     // Sorting Algorithm Bubblesort from
     //https://falconbyte.net/blog-java-bubblesort.php#:~:text=Der%20Bubblesort-Algorithmus%20in%20Java,sukzessive%20in%20die%20richtige%20Reihenfolge.
-    public void sortArrayList(){
+    public void sortArrayList() {
         Highscore smaller;
         Highscore bigger;
         boolean run = true;
-        for(int i = 0 ; i<highscoreArrayList.size()&& run == true;i++){
+        for (int i = 0; i < highscoreArrayList.size() && run; i++) {
             run = false;
-            for(int j=0 ; j<highscoreArrayList.size()-1;j++){
-                if(highscoreArrayList.get(j).getScore()<highscoreArrayList.get(j+1).getScore()){
+            for (int j = 0; j < highscoreArrayList.size() - 1; j++) {
+                if (highscoreArrayList.get(j).getScore() < highscoreArrayList.get(j + 1).getScore()) {
                     bigger = highscoreArrayList.get(j);
-                    smaller = highscoreArrayList.get(j+1);
-                    highscoreArrayList.set(j,smaller);
-                    highscoreArrayList.set(j+1,bigger);
+                    smaller = highscoreArrayList.get(j + 1);
+                    highscoreArrayList.set(j, smaller);
+                    highscoreArrayList.set(j + 1, bigger);
                     run = true;
                 }
             }
 
         }
-        return;
     }
-
     public ArrayList<Highscore> getHighscoreArrayList() {
         return highscoreArrayList;
     }
