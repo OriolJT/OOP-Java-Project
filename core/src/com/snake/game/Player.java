@@ -1,6 +1,6 @@
 package com.snake.game;
 
-public abstract class Player {
+public class Player {
     protected String name;
     public Snake mySnake;
 
@@ -15,6 +15,5 @@ public abstract class Player {
     public String getName() {
         return name;
     }
-
 
 }

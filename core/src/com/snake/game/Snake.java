@@ -3,7 +3,6 @@ package com.snake.game;
 import java.awt.event.KeyEvent;
 import java.util.LinkedList;
 import com.snake.game.Board;
-import org.jetbrains.annotations.NotNull;
 
 public class Snake {
 
@@ -68,21 +67,21 @@ public class Snake {
     }
 
     //newCell MUST BE a valid option to move (col+-1, row+-1) and inside the board
-    public int Crash(@NotNull Cell newCell)
+    public int crash(Cell newCell)
     {
         int aux =-1;
         switch(newCell.getState()){
             case FREE:
-                aux = 0;
-                break;
-            case ITEM:
                 aux = 1;
                 break;
-            case SNAKE:
+            case ITEM:
                 aux = 2;
                 break;
+            case SNAKE:
+                aux = 0;
+                break;
             case SNAKE2:
-                aux = 2;
+                aux = 0;
                 break;
         }
         return aux;

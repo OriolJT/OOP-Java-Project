@@ -17,6 +17,16 @@ public class Board {
     public int board_score2 = 666; //temporal score
     public int tempItemNum;
 
+    public Board(){
+        m_game = new Main();
+        m_player1 = new Player();
+        m_player2 = null;
+        m_mode = 1;
+        m_cells = null;
+        board_score1 = 0;
+        board_score2 = 0;
+        tempItemNum = 0;
+    }
 
     public int getBoard_score1(){
         return board_score1;
@@ -115,18 +125,37 @@ public class Board {
             }
     }
 
-    public void moveSnake(int player, char direction) {
+    public void moveSnake(int player, int direction) {
         if (player == 1){
-            m_player1.move(direction);
-        }
-        else{
+            switch (m_player1.mySnake.crash(m_player1.mySnake.movement(direction))){
+                case 0 :
+                    //TODO Game Over
+                    break;
+                case 1:
+                    m_player1.mySnake.moveSnake(m_player1.mySnake.movement(direction));
+                    break;
+                case 2:
+                    m_player1.mySnake.moveSnake(m_player1.mySnake.movement(direction));
+                    //TODO Pick up Item
+                    break;
+                }
+            }
             if (player == 2){
-                m_player2.move(direction);
+                switch(m_player2.mySnake.crash(m_player2.mySnake.movement(direction))){
+                    case 0 :
+                        //TODO Game Over
+                        break;
+                    case 1 :
+                        m_player2.mySnake.moveSnake(m_player2.mySnake.movement(direction));
+                        break;
+                    case 2 :
+                        m_player2.mySnake.moveSnake(m_player2.mySnake.movement(direction));
+                        break;
+                }
             }
             else{
-                //THROW EXCEPCTION
+                //THROW EXCEPTION
                 System.err.println("Player data wrong!");
             }
         }
     }
-}

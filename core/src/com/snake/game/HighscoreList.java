@@ -80,9 +80,12 @@ public class HighscoreList {
                 list[0]=highscore;
                 return;
             }
-            while(i!=10&&list[i].getScore()>highscore.getScore()) {
+            while(i<list_number) {
+                if(list[i].getScore()>highscore.getScore()){
+                    index++;
+                }
                 i++;
-                index=i;
+                System.out.println(Integer.toString(index).concat(" Bitte Geh Doch ").concat(Integer.toString(i)));
             }
             System.out.println(Integer.toString(index).concat("Test"));
             Highscore[] highscoreList = new Highscore[11];
