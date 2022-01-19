@@ -1,6 +1,9 @@
 package com.snake.game;
 
-public class Player {
+import java.util.concurrent.TimeUnit;
+
+
+public class Player /*extends Thread*/{
     protected String name;
     public Snake mySnake;
     public int m_score;
@@ -9,7 +12,10 @@ public class Player {
         this.name = null;
         this.mySnake = new Snake(cell, playerNum);
         this.m_score = 0;
+
     };
+
+
 
     public int getScore(){
         return m_score;

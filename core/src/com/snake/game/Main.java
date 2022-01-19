@@ -3,7 +3,7 @@ package com.snake.game;
 import com.badlogic.gdx.Game;
 import com.snake.game.screens.*;
 
-public class Main extends Game {
+public class Main extends Game  implements Runnable{
     public Board m_board;
     public Screen_Main m_screen;
 
@@ -13,6 +13,8 @@ public class Main extends Game {
         m_screen = new Screen_Main(this);
         setScreen(new MenuScreen(this, m_screen));
         m_board = new Board(this);
+        //Multithreading myThread = new Multithreading();
+
     }
 
     @Override
