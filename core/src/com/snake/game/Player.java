@@ -5,9 +5,9 @@ public class Player {
     public Snake mySnake;
     public int m_score;
 
-    public Player(Cell cell){
+    public Player(Cell cell, int playerNum){
         this.name = null;
-        this.mySnake = new Snake(cell);
+        this.mySnake = new Snake(cell, playerNum);
         this.m_score = 0;
     };
 

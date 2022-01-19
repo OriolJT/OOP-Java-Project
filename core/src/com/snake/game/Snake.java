@@ -11,6 +11,8 @@ public class Snake {
     private int direction; // 1=LEFT 2=UP 3=RIGHT 4=DOWN
     private Cell head;
     private int size;
+    private int playerNum;
+    private State playerState;
 
     /*public Snake(){//default, don't need specified cell
 
@@ -19,16 +21,23 @@ public class Snake {
         head.setState(State.SNAKE);
     }*/
 
-    public Snake(Cell start){
+    public Snake(Cell start, int playerNum){
         head = start;
+        this.playerNum = playerNum;
         snakeCells.add(head);
-        head.setState(State.SNAKE);
+
+        //check player number
+        if( playerNum == 1 ) playerState = State.SNAKE;
+        else if( playerNum == 2 ) playerState = State.SNAKE2;
+        head.setState(playerState);
+        //head.setState(State.SNAKE);
         direction = 4; //default movement is down
     }
 
     void eat() {
         snakeCells.add(head);
-        head.setState(State.SNAKE); //now there's the head of the snake
+        head.setState(playerState);
+        //head.setState(State.SNAKE); //now there's the head of the snake
     }
 
     public Cell movement(){ //calculates where to move
@@ -61,7 +70,9 @@ public class Snake {
         Cell last = snakeCells.removeLast();
         last.setState(State.FREE); //THAT WAY?
         head = cell;
-        head.setState(State.SNAKE);
+
+        head.setState(playerState);
+        //head.setState(State.SNAKE);
         snakeCells.addFirst(head);
 
     }

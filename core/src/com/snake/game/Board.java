@@ -105,7 +105,7 @@ public class Board {
         m_mode = mode;
         int row = ROWS/2;
         int col = COLS/2;
-        m_player1 = new Player(m_cells[row][col - 5]);
+        m_player1 = new Player(m_cells[row][col - 5], 1);
         if (mode == 1){ //singe player mode
            /* while(!m_gameFinished){
                 this.moveSnake(1);
@@ -120,7 +120,7 @@ public class Board {
         }
         else
             if (mode == 2){ //2 players mode (1 vs 1 mode)
-                m_player2 = new Player(m_cells[row][col + 5]);
+                m_player2 = new Player(m_cells[row][col + 5],2 );
             }
             else{
                 //THROW EXCEPCTION
