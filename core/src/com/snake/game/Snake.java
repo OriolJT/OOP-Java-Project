@@ -46,7 +46,8 @@ public class Snake {
         int x = head.getX();
         int y = head.getY();
 
-        switch(direction){
+        switch(direction){ //it takes the direction from the snake
+
             case 1: //left
                 x--;
                 break;
