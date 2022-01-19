@@ -11,7 +11,6 @@ public class Player {
         this.m_score = 0;
     };
 
-
     public int getScore(){
         return m_score;
     }

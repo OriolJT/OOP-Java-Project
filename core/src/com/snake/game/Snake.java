@@ -31,13 +31,13 @@ public class Snake {
         head.setState(State.SNAKE); //now there's the head of the snake
     }
 
-    public Cell movement(int dir){ //calculates where to move
+    public Cell movement(){ //calculates where to move
 
         Cell head = getHead();
         int x = head.getX();
         int y = head.getY();
 
-        switch(dir){
+        switch(direction){
             case 1: //left
                 x--;
                 break;

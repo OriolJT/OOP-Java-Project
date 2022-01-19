@@ -2,7 +2,7 @@ package com.snake.game.screens;
 
 import com.snake.game.Main;
 
-public class Screen_Main {
+public class Screen_Main extends Thread{
     public Main main;
 
     public Screen_Main(Main main){
