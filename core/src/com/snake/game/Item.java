@@ -7,7 +7,7 @@ import java.awt.*;
 public abstract class Item {
     protected String name;
     public int i_value;
-    public Cell[][] i_cell;
+    public Cell i_cell;
     private final int i_size = 1;
 
     Item(){
@@ -23,11 +23,11 @@ public abstract class Item {
         this.i_value = value;
     }
 
-    public Cell[][] getI_cell() {
+    public Cell getI_cell() {
         return i_cell;
     }
 
-    public void setI_cell(Cell[][] i_cell) {
+    public void setI_cell(Cell i_cell) {
         this.i_cell = i_cell;
     }
 

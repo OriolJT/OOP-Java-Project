@@ -13,27 +13,21 @@ public class Board {
     private int m_mode;
     private Cell[][] m_cells;
     private Item m_item;
-    public int board_score1 = 777; //temporal score
-    public int board_score2 = 666; //temporal score
     public int tempItemNum;
 
-    public Board(){
-        m_game = new Main();
-        m_player1 = new Player();
-        m_player2 = null;
-        m_mode = 1;
-        m_cells = null;
-        board_score1 = 0;
-        board_score2 = 0;
+    public Board(Main main, int mode){
+        m_game = main;
         tempItemNum = 0;
+        startGame();
+        gameMode(mode);
     }
 
     public int getBoard_score1(){
-        return board_score1;
+        return m_player1.getScore();
     }
 
     public int getBoard_score2(){
-        return board_score2;
+        return m_player2.getScore();
     }
 
     public int getRows(){
@@ -44,23 +38,13 @@ public class Board {
         return COLS;
     }
 
-    public void startGame(Main game){
-        m_game = game;
+    private void startGame(){
         m_cells = new Cell[ROWS][COLS];
         //Here we create Matrix of Cells.
         for (int row = 0; row < ROWS; row++) {
             for (int column = 0; column < COLS; column++) {
                 m_cells[row][column] = new Cell(row, column);
             }
-        }
-        m_cells[3][3].setState(State.SNAKE); //TODO: DELETE THIS LINE SINCE ITS JUST TO TEST
-        m_cells[4][3].setState(State.SNAKE); //TODO: DELETE THIS LINE SINCE ITS JUST TO TEST
-        m_cells[5][3].setState(State.SNAKE); //TODO: DELETE THIS LINE SINCE ITS JUST TO TEST
-
-        if(m_game.m_screen.playScreen.getGameMode() ==2) {
-            m_cells[26][12].setState(State.SNAKE2); //TODO: DELETE THIS LINE SINCE ITS JUST TO TEST
-            m_cells[27][12].setState(State.SNAKE2); //TODO: DELETE THIS LINE SINCE ITS JUST TO TEST
-            m_cells[28][12].setState(State.SNAKE2); //TODO: DELETE THIS LINE SINCE ITS JUST TO TEST
         }
 
         //Now we generate the 1st item of the game.
@@ -69,6 +53,7 @@ public class Board {
 
     private int createItem(){ //This function can only be called when there is not another item on the board.
         //We create the item making sure that there is not a snake in that posisiton.
+        m_item = null; //we delete an item in case that already exists one in the game.
         boolean free = false;
         int row = -1;
         int col = -1;
@@ -97,6 +82,7 @@ public class Board {
         m_item = tempItem; //Since there is only one item on the board, the class Board will have it. But the cell itself will know where the item is.
         m_cells[row][col].setState(State.ITEM);
         m_cells[row][col].setItem(m_item);
+        tempItem.setI_cell(m_cells[row][col]);
         
         return itemNumber;
     }
@@ -110,14 +96,16 @@ public class Board {
         return m_cells;
     }
 
-    public void gameMode(int mode){
+    private void gameMode(int mode){
         m_mode = mode;
+        int row = ROWS/2;
+        int col = COLS/2;
+        m_player1 = new Player(m_cells[row][col - 5]);
         if (mode == 1){ //singe player mode
-            //m_player1.start();
         }
         else
             if (mode == 2){ //2 players mode (1 vs 1 mode)
-
+                m_player2 = new Player(m_cells[row][col + 5]);
             }
             else{
                 //THROW EXCEPCTION
@@ -129,14 +117,16 @@ public class Board {
         if (player == 1){
             switch (m_player1.mySnake.crash(m_player1.mySnake.movement(direction))){
                 case 0 :
-                    //TODO Game Over
+                    m_game.gameOver(); //Snake dead so the game is finished.
                     break;
                 case 1:
-                    m_player1.mySnake.moveSnake(m_player1.mySnake.movement(direction));
+                    m_player1.mySnake.moveSnake(m_player1.mySnake.movement(direction)); //Move snake to free cell
                     break;
                 case 2:
-                    m_player1.mySnake.moveSnake(m_player1.mySnake.movement(direction));
-                    //TODO Pick up Item
+                    m_player1.mySnake.moveSnake(m_player1.mySnake.movement(direction)); //Pick up Item
+                    m_item.getI_cell().setState(State.FREE);
+                    m_player1.sumScore(m_item.getI_value());
+                    createItem();
                     break;
                 }
             }

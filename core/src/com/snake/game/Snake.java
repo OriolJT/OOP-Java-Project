@@ -12,7 +12,7 @@ public class Snake {
     private Cell head;
     private int size;
 
-    /*public Snake(){//default, dont need specified cell
+    /*public Snake(){//default, don't need specified cell
 
         head = Cell(Board.getCols()/2,Board.getRows()/2); //this gives conflict
         snakeCells.add(head);

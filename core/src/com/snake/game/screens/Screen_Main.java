@@ -52,12 +52,11 @@ public class Screen_Main {
                 main.setScreen(highScoreScreen);
                 break;
             case END_S:
-                main.startGame(1);
                 if (endScreen == null) endScreen = new EndScreen(main, this);
                 main.setScreen(endScreen);
                 break;
             case GAME_S:
-                main.startGame(2);
+                main.startGame(1);
                 if (gameScreen == null) gameScreen = new GameScreen(main,this);
                 main.setScreen(gameScreen);
                 break;

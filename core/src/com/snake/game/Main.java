@@ -20,9 +20,7 @@ public class Main extends Game {
     }
 
     public void startGame(int mode){ //main will call this function
-        m_board = new Board();
-        m_board.gameMode(mode);
-        m_board.startGame(this);
+        m_board = new Board(this, mode);
         m_screen.startGame();
     }
 
@@ -39,5 +37,9 @@ public class Main extends Game {
 
     public Cell[][] getCells(){
         return m_board.getCells();
+    }
+
+    public void gameOver(){ //TODO: probably its not enough to end the game, look at this.
+        m_screen.changeScreen(4);
     }
 }
