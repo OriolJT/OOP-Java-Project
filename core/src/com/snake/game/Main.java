@@ -12,6 +12,7 @@ public class Main extends Game {
         //Init Screen as menuScreen
         m_screen = new Screen_Main(this);
         setScreen(new MenuScreen(this, m_screen));
+        m_board = new Board(this);
     }
 
     @Override
@@ -20,9 +21,9 @@ public class Main extends Game {
     }
 
     public void startGame(int mode){ //main will call this function
-        m_board = new Board(this, mode);
         m_screen.startGame();
-    }
+        m_board.startGame(mode);
+   }
 
     /* Since we have to see the highscore in real time, instead of the screen asking for the highscore, the class
         board will call the function setHighscore from the main so this one sends the order to the class Screen with
@@ -31,8 +32,12 @@ public class Main extends Game {
         m_screen.setHighscore(highscore);
     }
 
-    public void moveSnake(int player, char direction){
-        m_board.moveSnake(player, direction);
+    public void moveSnake(int player){
+        m_board.moveSnake(player);
+    }
+
+    public void setDirection(int player, int direction){
+        m_board.setDirection(player, direction);
     }
 
     public Cell[][] getCells(){

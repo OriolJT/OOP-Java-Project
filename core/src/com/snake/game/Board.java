@@ -1,5 +1,7 @@
 package com.snake.game;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
+import com.snake.game.State;
 
 public class Board {
     private final int ROWS = 30; //this is a temporal number.
@@ -14,12 +16,14 @@ public class Board {
     private Cell[][] m_cells;
     private Item m_item;
     public int tempItemNum;
+    boolean m_gameFinished;
 
-    public Board(Main main, int mode){
+
+
+    public Board(Main main){
+        m_gameFinished = false;
         m_game = main;
         tempItemNum = 0;
-        startGame();
-        gameMode(mode);
     }
 
     public int getBoard_score1(){
@@ -38,7 +42,7 @@ public class Board {
         return COLS;
     }
 
-    private void startGame(){
+    public void startGame(int mode){
         m_cells = new Cell[ROWS][COLS];
         //Here we create Matrix of Cells.
         for (int row = 0; row < ROWS; row++) {
@@ -49,6 +53,7 @@ public class Board {
 
         //Now we generate the 1st item of the game.
         tempItemNum = createItem();
+        gameMode(mode);
     }
 
     private int createItem(){ //This function can only be called when there is not another item on the board.
@@ -100,12 +105,22 @@ public class Board {
         m_mode = mode;
         int row = ROWS/2;
         int col = COLS/2;
-        m_player1 = new Player(m_cells[row][col - 5]);
+        m_player1 = new Player(m_cells[row][col - 5], 1);
         if (mode == 1){ //singe player mode
+           /* while(!m_gameFinished){
+                this.moveSnake(1);
+                try {
+                    TimeUnit.MILLISECONDS.sleep(250);
+                }
+                catch (InterruptedException e) {
+                    // Restore the interrupted status
+                    Thread.currentThread().interrupt();
+                }
+            }*/
         }
         else
             if (mode == 2){ //2 players mode (1 vs 1 mode)
-                m_player2 = new Player(m_cells[row][col + 5]);
+                m_player2 = new Player(m_cells[row][col + 5],2 );
             }
             else{
                 //THROW EXCEPCTION
@@ -113,17 +128,27 @@ public class Board {
             }
     }
 
-    public void moveSnake(int player, int direction) {
+
+    public void setDirection(int player, int direction){
         if (player == 1){
-            switch (m_player1.mySnake.crash(m_player1.mySnake.movement(direction))){
+            m_player1.mySnake.setDirection(direction);
+        }
+        else{
+            m_player2.mySnake.setDirection(direction);
+        }
+    }
+    public void moveSnake(int player) {
+        if (player == 1){
+            switch (m_player1.mySnake.crash(m_player1.mySnake.movement())){
                 case 0 :
+                    m_gameFinished = true;
                     m_game.gameOver(); //Snake dead so the game is finished.
                     break;
                 case 1:
-                    m_player1.mySnake.moveSnake(m_player1.mySnake.movement(direction)); //Move snake to free cell
+                    m_player1.mySnake.moveSnake(m_player1.mySnake.movement()); //Move snake to free cell
                     break;
                 case 2:
-                    m_player1.mySnake.moveSnake(m_player1.mySnake.movement(direction)); //Pick up Item
+                    m_player1.mySnake.moveSnake(m_player1.mySnake.movement()); //Pick up Item
                     m_item.getI_cell().setState(State.FREE);
                     m_player1.sumScore(m_item.getI_value());
                     createItem();
@@ -131,15 +156,15 @@ public class Board {
                 }
             }
             if (player == 2){
-                switch(m_player2.mySnake.crash(m_player2.mySnake.movement(direction))){
+                switch(m_player2.mySnake.crash(m_player2.mySnake.movement())){
                     case 0 :
                         //TODO Game Over
                         break;
                     case 1 :
-                        m_player2.mySnake.moveSnake(m_player2.mySnake.movement(direction));
+                        m_player2.mySnake.moveSnake(m_player2.mySnake.movement());
                         break;
                     case 2 :
-                        m_player2.mySnake.moveSnake(m_player2.mySnake.movement(direction));
+                        m_player2.mySnake.moveSnake(m_player2.mySnake.movement());
                         break;
                 }
             }
