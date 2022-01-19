@@ -140,6 +140,7 @@ public class Board {
                         break;
                     case 2 :
                         m_player2.mySnake.moveSnake(m_player2.mySnake.movement(direction));
+                        //TODO Pick Item
                         break;
                 }
             }

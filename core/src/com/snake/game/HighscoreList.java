@@ -2,105 +2,73 @@ package com.snake.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
-import com.badlogic.gdx.utils.Null;
 
-import java.text.DateFormat;
-import java.util.Date;
+import java.util.ArrayList;
 
-
+/**@Author Minh Le
+ *
+ */
 public class HighscoreList {
-    public final int  list_number = 10;
-    public Highscore [] list;
+    private final int list_number = 10;
     Preferences prefs = Gdx.app.getPreferences("My Highscores");
-    public Highscore[] getList(){
-        return this.list;
-    }
-    public HighscoreList(){
-        list = new Highscore[list_number];
-        for(int i =0; i<list_number;i++){
+    public ArrayList<Highscore> highscoreArrayList = new ArrayList<Highscore>();
+
+    //Standard Constructor for HighscoreList
+    //takes Information from my Preferences and creates a ArrayList
+    public HighscoreList() {
+        ArrayList<Highscore> highscoreArrayList = new ArrayList<>(list_number);
+        for(int i = 0; i<highscoreArrayList.size()-1;i++){
             Highscore h = new Highscore();
-            h.setName(prefs.getString("Player".concat(Integer.toString(i))));
-            h.setScore(prefs.getInteger(Integer.toString(i)));
+            h.setName(prefs.getString("Player".concat(Integer.toString(i)),"Default"));
+            h.setScore(prefs.getInteger(Integer.toString(i),0));
             h.setDate(prefs.getString("Date".concat(Integer.toString(i))));
-            list[i] = h;
+            highscoreArrayList.add(h);
         }
     }
 
-    public HighscoreList(Highscore[] hs_l){
-        list = new Highscore[list_number];
-        int i =0;
-        while(i!=10){
-            list[i]=hs_l[i];
-            i++;
-        }
-        i=0;
-    }
-    public void deleteHighscore(String name){
-        int i=0;
-        while(!list[i].getName().equals(name)){
-            i++;
-        }
-        list[i] = list[i+1];
-        while(list[i+1]!=null){
-            list[i]=list[i+1];
-        }
-        i=0;
-    }
-    public void deleteHighscores(){
-        int i=0;
-        while(i<list_number){
-            list[i]=null;
-            i++;
-        }
-    }
-    public int getIndex(Highscore highscore){
-        int i = 0;
-        while (i<list_number) {
-            if(list[i].getScore()==highscore.getScore()&&list[i].getName()==highscore.getName()){
-                return i;
-            }
-            i++;
-        }
-        return 0;
-    }
-    public void printHighscoreList(){
-        int i = 0;
-        while(i<list_number){
-            System.out.print(list[i].getName());
-        }
-    }
-    public void insertHighscorePos(int pos){
-
-    }
-    public void insertHighscore(Highscore highscore) {
-            int i = 0;
-            int index=0;
-            Highscore p = null;
-            if(list[0]==null){
-                list[0]=highscore;
-                return;
-            }
-            while(i<list_number) {
-                if(list[i].getScore()>highscore.getScore()){
-                    index++;
+    // Sorting Algorithm Bubblesort from
+    //https://falconbyte.net/blog-java-bubblesort.php#:~:text=Der%20Bubblesort-Algorithmus%20in%20Java,sukzessive%20in%20die%20richtige%20Reihenfolge.
+    public void sortArrayList(){
+        Highscore smaller;
+        Highscore bigger;
+        boolean run = true;
+        for(int i = 0 ; i<highscoreArrayList.size()&& run == true;i++){
+            run = false;
+            for(int j=0 ; j<highscoreArrayList.size()-1;j++){
+                if(highscoreArrayList.get(j).getScore()<highscoreArrayList.get(j+1).getScore()){
+                    bigger = highscoreArrayList.get(j);
+                    smaller = highscoreArrayList.get(j+1);
+                    highscoreArrayList.set(j,smaller);
+                    highscoreArrayList.set(j+1,bigger);
+                    run = true;
                 }
-                i++;
-                System.out.println(Integer.toString(index).concat(" Bitte Geh Doch ").concat(Integer.toString(i)));
             }
-            System.out.println(Integer.toString(index).concat("Test"));
-            Highscore[] highscoreList = new Highscore[11];
 
-            for(int k=0;k<index;k++){
-                highscoreList[k]=list[k];
-                System.out.println(Integer.toString(index).concat(" Erste For Schleife"));
+        }
+        return;
+    }
+
+    public ArrayList<Highscore> getHighscoreArrayList() {
+        return highscoreArrayList;
+    }
+
+    //Adds a Highscore to the Arraylist and simultaneously changes the Preferences Saves
+    //Removes access Highscores to reach the number 10;
+    public void addHighscore(Highscore highscore){
+        highscoreArrayList.add(highscore);
+        sortArrayList();
+        while(highscoreArrayList.size()>10){
+            highscoreArrayList.remove(highscoreArrayList.size()-1);
+        }
+        saveToPreferences();
+    }
+
+    //Saves the current Arraylist to Preferences
+    public void saveToPreferences(){
+        for (int i = 0; i<highscoreArrayList.size()-1;i++){
+            if(highscoreArrayList.get(i)!=null) {
+                highscoreArrayList.get(i).saveHighscore(this, i);
             }
-            highscoreList[index]=highscore;
-            for(int j=index;j<list_number;j++){
-                highscoreList[j+1]=list[j];
-                System.out.println(Integer.toString(index).concat(" Zweite For Schleife"));
-            }
-            for(int l=0;l<list_number;l++){
-                list[l]=highscoreList[l];
-            }
+        }
     }
 }
