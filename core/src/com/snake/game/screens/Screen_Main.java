@@ -56,7 +56,9 @@ public class Screen_Main extends Thread{
                 main.setScreen(endScreen);
                 break;
             case GAME_S:
-                main.startGame(1);
+                if(playScreen.modeFlag ==1) main.startGame(1);
+                else if(playScreen.modeFlag ==2) main.startGame(2);
+                
                 if (gameScreen == null) gameScreen = new GameScreen(main,this);
                 main.setScreen(gameScreen);
                 break;
