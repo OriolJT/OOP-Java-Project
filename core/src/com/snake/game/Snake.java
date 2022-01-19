@@ -73,16 +73,16 @@ public class Snake {
         int aux =-1;
         switch(newCell.getState()){
             case FREE:
-                aux = 0;
-                break;
-            case ITEM:
                 aux = 1;
                 break;
-            case SNAKE:
+            case ITEM:
                 aux = 2;
                 break;
+            case SNAKE:
+                aux = 0;
+                break;
             case SNAKE2:
-                aux = 2;
+                aux = 0;
                 break;
         }
         return aux;
