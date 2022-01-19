@@ -3,7 +3,7 @@ package com.snake.game;
 import com.badlogic.gdx.Game;
 import com.snake.game.screens.*;
 
-public class Main extends Game  implements Runnable{
+public class Main extends Game{
     public Board m_board;
     public Screen_Main m_screen;
 
