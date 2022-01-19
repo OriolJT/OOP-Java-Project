@@ -19,9 +19,7 @@ public class Cell {
         this.state = state;
     }
 
-    public static Cell add(Cell b){
-        return new Cell(this.x + b.x, this.y + b.y);
-    }
+
     public int getX(){
         return x;
     }

@@ -1,26 +1,31 @@
 package com.snake.game;
 //import java.awt.event.*;
 
-public abstract class Player {
+
+
+public class Player {
 
     protected String name;
     public Snake mySnake;
 
     Player(){
-        this.name = null;
         this.mySnake = null;
-    };
+        this.name = null;
+    }
+    Player(String name, Cell head){
 
-    Player(String name, Cell cell) {
+        this.mySnake = new Snake(head);
         this.name = name;
-        this.mySnake = Snake(cell);
-    };
+    }
 
 
 
     public String getName() {
         return name;
     }
+
+
+
 
 /*
     this is a sample code for keybinding, take what is needed form here
@@ -54,4 +59,3 @@ public abstract class Player {
  */
 
     }
-}
