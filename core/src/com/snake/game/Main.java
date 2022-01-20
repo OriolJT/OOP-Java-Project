@@ -44,9 +44,6 @@ public class Main extends Game {
         m_board.setDirection(player, direction);
     }
 
-    public Cell[][] getCells(){
-        return m_board.getCells();
-    }
 
     public void gameOver(){ //TODO: probably its not enough to end the game, look at this.
         m_screen.changeScreen(4);

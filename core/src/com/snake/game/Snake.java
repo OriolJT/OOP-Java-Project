@@ -4,14 +4,17 @@ import java.awt.event.KeyEvent;
 import java.util.LinkedList;
 import com.snake.game.Board;
 
+/**
+ * @Author Minh Le,
+ */
 public class Snake {
 
-    private LinkedList<Cell> snakeCells = new LinkedList<Cell>();
+    private LinkedList<Cell> snakeCells = new LinkedList<>();
 
     private int direction; // 1=LEFT 2=UP 3=RIGHT 4=DOWN
     private Cell head;
     private int size;
-    private int playerNum;
+    private final int playerNum;
     private State playerState;
 
     /*public Snake(){//default, don't need specified cell
@@ -20,6 +23,16 @@ public class Snake {
         snakeCells.add(head);
         head.setState(State.SNAKE);
     }*/
+
+
+    public Snake(){
+        head=null;
+        playerNum = 0;
+        snakeCells = new LinkedList<>();
+        size = 0;
+        playerState = null;
+    }
+
 
     public Snake(Cell start, int playerNum){
         head = start;
@@ -71,11 +84,9 @@ public class Snake {
         Cell last = snakeCells.removeLast();
         last.setState(State.FREE); //THAT WAY?
         head = cell;
-
         head.setState(playerState);
         //head.setState(State.SNAKE);
         snakeCells.addFirst(head);
-
     }
 
     //newCell MUST BE a valid option to move (col+-1, row+-1) and inside the board
@@ -99,18 +110,35 @@ public class Snake {
         return aux;
     }
 
+    //TODO Snake LinkedList size = Size Snake
+    public void addSnakeCell(Cell cell){
+        snakeCells.addFirst(cell);
+    }
+    public void deleteSnakeCell(){
+        snakeCells.removeLast();
+    }
     public LinkedList<Cell> getSnakeCells()
     {
         return snakeCells;
     }
 
-    public void setSnakeCells(LinkedList<Cell> snakeCells) { this.snakeCells = snakeCells;}
+    public void setSnakeCells(LinkedList<Cell> snakeCells) {
+        this.snakeCells = snakeCells;
+    }
 
-    public int getDirection() {return direction;}
+    public int getDirection() {
+        return direction;
+    }
 
-    public void setDirection(int dir) {this.direction = dir;}
+    public void setDirection(int dir) {
+        this.direction = dir;
+    }
 
-    public Cell getHead() {return head;}
+    public Cell getHead() {
+        return head;
+    }
 
-    public void setHead(Cell head) {this.head = head;}
+    public void setHead(Cell head) {
+        this.head = head;
+    }
 }

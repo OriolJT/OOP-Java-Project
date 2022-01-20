@@ -80,7 +80,6 @@ public class HighScoreScreen extends Screen_Abstract {
         highscoreList.addHighscore(highscore);
         highscoreList.addHighscore(highscore3);
         highscoreList.addHighscore(highscore4);
-        highscoreList.addHighscore(highscore5);
         //Draws the Highscores on the Screen
         for (int i = 0; i<highscoreList.highscoreArrayList.size();i++){
             //adds one Score Row

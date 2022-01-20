@@ -11,11 +11,12 @@ import java.util.ArrayList;
 public class HighscoreList {
     private final int list_number = 10;
     Preferences prefs = Gdx.app.getPreferences("My Highscores");
-    public ArrayList<Highscore> highscoreArrayList = new ArrayList<Highscore>();
+    public ArrayList<Highscore> highscoreArrayList = new ArrayList<>();
 
     //Standard Constructor for HighscoreList
     //takes Information from my Preferences and creates a ArrayList
     public HighscoreList() {
+        prefs.clear();
         ArrayList<Highscore> highscoreArrayList = new ArrayList<>(list_number);
         for(int i = 0; i<list_number-1;i++){
             Highscore h = new Highscore();
@@ -36,20 +37,16 @@ public class HighscoreList {
             run = false;
             for (int j = 0; j < highscoreArrayList.size() - 1; j++) {
                 if (highscoreArrayList.get(j).getScore() < highscoreArrayList.get(j + 1).getScore()) {
-                    bigger = highscoreArrayList.get(j);
-                    smaller = highscoreArrayList.get(j + 1);
-                    highscoreArrayList.set(j, smaller);
-                    highscoreArrayList.set(j + 1, bigger);
+                    bigger = highscoreArrayList.get(j+1);
+                    smaller = highscoreArrayList.get(j);
+                    highscoreArrayList.set(j+1, smaller);
+                    highscoreArrayList.set(j, bigger);
                     run = true;
                 }
             }
 
         }
     }
-    public ArrayList<Highscore> getHighscoreArrayList() {
-        return highscoreArrayList;
-    }
-
     //Adds a Highscore to the Arraylist and simultaneously changes the Preferences Saves
     //Removes access Highscores to reach the number 10;
     public void addHighscore(Highscore highscore){

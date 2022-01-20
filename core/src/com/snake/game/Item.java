@@ -9,12 +9,13 @@ public abstract class Item {
     public int i_value;
     public Cell i_cell;
     private final int i_size = 1;
+    protected final int point = 1;
 
     Item(){
         this.name = null;
         this.i_value = 0;
         this.i_cell = null;
-    };
+    }
 
     public int getI_value() {
         return i_value;
@@ -31,10 +32,7 @@ public abstract class Item {
         this.i_cell = i_cell;
     }
 
-    public String getName() {
-        return name;
-    }
-    public abstract Animation getAnim();
+    public abstract String getName();
     public abstract Image getImg();
     public abstract int addToScore(int score,int multiplier);
 }

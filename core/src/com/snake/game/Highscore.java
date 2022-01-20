@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 
 /**
- * @Author Minh Le
+ *
  */
 public class Highscore {
     private String name;
@@ -44,6 +44,5 @@ public class Highscore {
         prefs.putString("Player".concat(Integer.toString(i)), this.getName());
         prefs.putString("Date".concat(Integer.toString(i)), this.getDate());
         prefs.flush();
-        System.out.println(prefs.get().values());
     }
 }

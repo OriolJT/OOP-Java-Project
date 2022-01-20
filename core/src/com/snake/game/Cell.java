@@ -5,6 +5,11 @@ public class Cell {
     private State state; //what is inside the cell
     private Item m_item;
 
+    public Cell(){
+        this.x = 0;
+        this.y = 0;
+    }
+
     public Cell(int x, int y){
         this.x = x;
         this.y = y;
@@ -32,6 +37,9 @@ public class Cell {
         m_item = item;
     }
     public void deleteItem(){ //TODO:
-
+        if(this.state==State.ITEM){
+            setItem(null);
+            setState(State.FREE);
+        }
     }
 }

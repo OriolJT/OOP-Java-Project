@@ -2,24 +2,25 @@ package com.snake.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.snake.game.*;
+import com.snake.game.Cell;
+import com.sun.rowset.internal.Row;
 
-public class GameScreen extends Screen_Abstract {
+import java.util.LinkedList;
+import java.util.Random;
+
+public class GameScreen extends Screen_Abstract implements Runnable {
     private Renderer renderer;
     public Main game;
     protected Screen_Main s_main;
     private Table table;
     private Label title;
-
-    public Cell[][] cells;
+    private Board board;
     protected int RowNCol = 30;
     private int itemNum;
     public int score1, score2;
-
+    public Cell[][] cells;
     Texture texture_a = new Texture(Gdx.files.internal("apple.png"));
     Image apple = new Image(texture_a);
     Texture texture_k = new Texture(Gdx.files.internal("kiwi.png"));
@@ -31,20 +32,69 @@ public class GameScreen extends Screen_Abstract {
     public GameScreen(Main main, Screen_Main s_main) {
         super(main, s_main);
         this.s_main = s_main;
-        this.cells = s_main.main.getCells();
+        this.cells = s_main.main.m_board.getCells();
+        this.board = s_main.main.m_board;
         renderer = new Renderer(this);
+        //initializes Player 1 with modeFlag==1 (Single Player)
+        if(main.m_screen.playScreen.modeFlag==1){
+            board.setM_player1(new Player());
+            board.getM_player1().setName("Player 1");
+            board.getM_player1().setSnake(new Snake());
+            board.getM_player1().getSnake().setHead(randomize());
+            board.setm_mode(1);
+        }
+        //initializes Player 2 with modeFlag==2 (1 versus 1)
+        if(main.m_screen.playScreen.modeFlag==2){
+            board.setM_player1(new Player());
+            board.getM_player1().setName("Player 1");
+            board.getM_player1().setSnake(new Snake());
+            board.getM_player1().getSnake().setHead(randomize());
+            board.setM_player2(new Player());
+            board.getM_player2().setName("Player 2");
+            board.getM_player2().setSnake(new Snake());
+            board.getM_player2().getSnake().setHead(randomize());
+            board.setm_mode(2);
+        }
+    }
 
-        // Draw items as an image
-        drawItem();
+    public void drawSnake(){
+        if(main.m_screen.playScreen.modeFlag==1){
+           LinkedList<Cell> snakeCells = board.getM_player1().getSnake().getSnakeCells();
+            for (Cell c: snakeCells
+                 ) {
+                //TODO Draw SnakeCells and IMG;
+            }
+        }
+        if(main.m_screen.playScreen.modeFlag==2) {
+            LinkedList<Cell> snakeCells = board.getM_player1().getSnake().getSnakeCells();
+            LinkedList<Cell> snakeCells2 = board.getM_player2().getSnake().getSnakeCells();
+            for(Cell c : snakeCells){
+                //TODO Draw SnakeCells Player 1
+            }
+            for (Cell c: snakeCells2
+                 ) {
+                //TODO Draw SnakeCells Player 2
+            }
+            }
+        }
+
+
+    public Cell randomize(){
+        Random rand = new Random();
+        int x = rand.nextInt(RowNCol);
+        int y = rand.nextInt(RowNCol);
+        Cell cell = new Cell(x,y);
+        if(cells[x][y].getState()!=State.FREE){
+            randomize();
+        }
+        return cell;
     }
 
     public void drawItem(){
         for (int x = 1; x < RowNCol - 1; x++) {
             for (int y = 1; y < RowNCol - 1; y++) {
-
                 if (cells[x][y].getState() == State.ITEM) {
                     itemNum = main.m_board.tempItemNum;
-
                     switch (itemNum) {
                         case 0: //apple
                             apple.setPosition(x * RowNCol, y * RowNCol);
@@ -64,6 +114,13 @@ public class GameScreen extends Screen_Abstract {
         }
     }
 
+    private void update(){
+
+    }
+
+    @Override
+    public void run(){
+    }
 
     @Override
     public void show() {
@@ -98,12 +155,14 @@ public class GameScreen extends Screen_Abstract {
         //exit button
         final TextButton exit_Bt = super.createBt("EXIT", s_main.END_S);
         table.add(exit_Bt).size(80, 60).pad(10,0,0,40).top().fill();
+        drawItem();
     }
 
     @Override
     public void render(float delta){
         renderer.render();
-
+        drawItem();
+        drawSnake();
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
     }
