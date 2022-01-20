@@ -18,7 +18,7 @@ public class HighScoreScreen extends Screen_Abstract {
     private Screen_Main s_main;
     private Table table;
     private Label title;
-    private HighscoreList highscoreList;
+    //private HighscoreList highscoreList;
     Preferences prefs = Gdx.app.getPreferences("My Highscores");
     public HighScoreScreen(Main main, Screen_Main s_main){
         super(main, s_main);
@@ -75,13 +75,13 @@ public class HighScoreScreen extends Screen_Abstract {
         highscore5.setDate(date);
 
 
-        HighscoreList highscoreList = new HighscoreList();
-        highscoreList.addHighscore(highscore2);
-        highscoreList.addHighscore(highscore);
-        highscoreList.addHighscore(highscore3);
-        highscoreList.addHighscore(highscore4);
+        s_main.highscoreList.addHighscore(highscore2);
+        s_main.highscoreList.addHighscore(highscore);
+        s_main.highscoreList.addHighscore(highscore3);
+        s_main.highscoreList.addHighscore(highscore4);
+        s_main.highscoreList.addHighscore(highscore5);
         //Draws the Highscores on the Screen
-        for (int i = 0; i<highscoreList.highscoreArrayList.size();i++){
+        for (int i = 0; i<s_main.highscoreList.highscoreArrayList.size();i++){
             //adds one Score Row
             table.add(prefs.getString(Integer.toString(i))).fillX().pad(0,15,25,60);
             //adds one Name Row

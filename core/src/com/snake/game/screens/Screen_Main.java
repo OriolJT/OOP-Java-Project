@@ -1,12 +1,15 @@
 package com.snake.game.screens;
 
+import com.snake.game.HighscoreList;
 import com.snake.game.Main;
 
 public class Screen_Main extends Thread{
     public Main main;
+    protected HighscoreList highscoreList;
 
     public Screen_Main(Main main){
         this.main = main;
+        highscoreList = new HighscoreList();
     }
 
     public void startGame(){
