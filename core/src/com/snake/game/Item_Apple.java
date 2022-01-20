@@ -6,6 +6,10 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 
 import java.awt.*;
 
+/**
+ * @Author Minh Le
+ *
+ */
 public class Item_Apple extends Item{
     private Image img;
     private final String apple = "Apple";

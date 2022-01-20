@@ -3,6 +3,10 @@ package com.snake.game;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+/**
+ * @Author Minh Le
+ * class Itemlist, holds every Item that is currently on the board
+ */
 public class ItemList {
     public ArrayList<Item> itemArrayList;
     public ItemList(){

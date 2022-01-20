@@ -4,6 +4,10 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 
 import java.awt.*;
 
+/**
+ * @Author Minh Le
+ * abstract class for Item
+ */
 public abstract class Item {
     protected String name;
     public int i_value;

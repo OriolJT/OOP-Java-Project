@@ -14,16 +14,12 @@ public class Renderer {
     private ShapeRenderer shapeRenderer;
 
 
-    Music music = Gdx.audio.newMusic(Gdx.files.internal("Snake Music.mp3"));
-
     public Renderer(GameScreen gameScreen){
         this.GS = gameScreen;
         shapeRenderer = new ShapeRenderer();
     }
 
     public void render(int modeFlag, int x, int y){
-        music.setVolume(0.2f);
-        music.play();
 
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         if (GS.cells[x][y].getState() == State.SNAKE){

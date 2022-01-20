@@ -52,7 +52,10 @@ public class HighScoreScreen extends Screen_Abstract {
 
         Timestamp ts = new Timestamp(System.currentTimeMillis());
         String date = new Date(ts.getTime()).toString();
-
+        /**
+         * because the game does not work, we are adding some Highscores manually to show their functionality in
+         * Highscorescreen
+         */
         Highscore highscore = new Highscore();
         highscore.setName("Hans");
         highscore.setScore(5);

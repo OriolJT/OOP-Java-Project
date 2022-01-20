@@ -1,6 +1,7 @@
 package com.snake.game.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -11,6 +12,7 @@ import java.util.LinkedList;
 import java.util.Random;
 
 public class GameScreen extends Screen_Abstract implements Runnable {
+    boolean gameState;
     private Renderer renderer;
     public Main game;
     protected Screen_Main s_main;
@@ -28,12 +30,22 @@ public class GameScreen extends Screen_Abstract implements Runnable {
     Texture texture_b = new Texture(Gdx.files.internal("banana.png"));
     Image banana = new Image(texture_b);
 
+    Music music = Gdx.audio.newMusic(Gdx.files.internal("Snake Music.mp3"));
 
     public GameScreen(Main main, Screen_Main s_main) {
         super(main, s_main);
         this.s_main = s_main;
         this.cells = s_main.main.m_board.getCells();
         this.board = s_main.main.m_board;
+
+        //starts a Thread
+        Game game = new Game(main,s_main);
+        Thread thread = new Thread(game);
+        try
+        {
+            thread.start();
+            gameState=true;
+        }catch (NullPointerException e){}
         renderer = new Renderer(this);
 
         //initializes Player 1 with modeFlag==1 (Single Player)
@@ -43,6 +55,8 @@ public class GameScreen extends Screen_Abstract implements Runnable {
             board.getM_player1().setSnake(new Snake());
             board.getM_player1().getSnake().setHead(randomize());
             board.setm_mode(1);
+            board.spawnItem(randomize());
+            board.spawnItem(randomize());
         }
         //initializes Player 2 with modeFlag==2 (1 versus 1)
         if(main.m_screen.playScreen.modeFlag==2){
@@ -55,9 +69,17 @@ public class GameScreen extends Screen_Abstract implements Runnable {
             board.getM_player2().setSnake(new Snake());
             board.getM_player2().getSnake().setHead(randomize());
             board.setm_mode(2);
+            board.spawnItem(randomize());
+            board.spawnItem(randomize());
+            board.spawnItem(randomize());
         }
     }
 
+
+    /**
+     * @Author Minh Le, Jina Kong
+     * draws every part of the Snake that is on the Field
+     */
     public void drawSnake(){
         if(main.m_screen.playScreen.modeFlag==1){
            LinkedList<Cell> snakeCells = board.getM_player1().getSnake().getSnakeCells();
@@ -88,7 +110,10 @@ public class GameScreen extends Screen_Abstract implements Runnable {
             }
         }
 
-
+    /**
+     * @Author Minh Le
+     * @return random Cell that is empty
+     */
     public Cell randomize(){
         Random rand = new Random();
         int x = rand.nextInt(RowNCol);
@@ -124,7 +149,13 @@ public class GameScreen extends Screen_Abstract implements Runnable {
         }
     }
 
-    private void update(){
+    public void update(){
+        if(music.isPlaying()&&gameState ==false){
+            music.stop();
+        }
+        if (music.isPlaying() == false && gameState == true) {
+            music.play();
+        }
 
     }
 

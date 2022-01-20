@@ -4,6 +4,10 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 
 import java.awt.*;
 
+/**
+ * @Author
+ * Minh Le
+ */
 public class Item_Banana extends Item{
     private Image img;
     private final String banana = "Banana";

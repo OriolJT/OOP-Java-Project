@@ -3,6 +3,10 @@ package com.snake.game;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+/**
+ * @Author Minh Le
+ * Slotmachine(Combosystem) is unused mostly
+ */
 public class Slotmachine {
     private final ArrayList<Item> itemArrayList = new ArrayList<>();
     private final int s_number = 3;

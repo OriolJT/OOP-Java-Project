@@ -1,6 +1,7 @@
 package com.snake.game;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.snake.game.screens.*;
 
 public class Main extends Game{
@@ -15,6 +16,13 @@ public class Main extends Game{
         m_board = new Board(this);
         //Multithreading myThread = new Multithreading();
 
+    }
+
+    @Override
+    public void dispose(){
+        super.dispose();
+        Gdx.app.exit();
+        System.exit(0);
     }
 
     @Override

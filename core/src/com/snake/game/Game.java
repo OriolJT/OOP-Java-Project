@@ -1,31 +1,32 @@
 package com.snake.game;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.snake.game.screens.MenuScreen;
 
+import com.snake.game.screens.Screen_Main;
 
-public class Game extends com.badlogic.gdx.Game {
-    SpriteBatch batch;
-    ShapeRenderer shapeRenderer;
-    BitmapFont font;
-
+public class Game implements Runnable {
+    private final float timeUpdate = 1/60;
+    private Main main;
+    boolean isRunning;
+    private Board board;
+    public Game(Main main, Screen_Main screen_main) {
+        this.board = screen_main.main.m_board;
+        this.main =main;
+    }
     @Override
-    public void create(){
-        batch = new SpriteBatch();
-        shapeRenderer = new ShapeRenderer();
-        font = new BitmapFont();
+    /**
+     * @Author Minh Le
+     */
+    public void run(){
+        isRunning=true;
+        while(isRunning){
+            try {
+                main.m_screen.gameScreen.update();
+                main.m_screen.gameScreen.render(timeUpdate);
+            }catch(NullPointerException e){
+            }
+        }
     }
 
-    @Override
-    public void dispose(){
-        batch.dispose();
-        shapeRenderer.dispose();
-        font.dispose();
-    }
 
     /*   private Board m_board;
     private Screen m_screen;
@@ -35,7 +36,7 @@ public class Game extends com.badlogic.gdx.Game {
         this.width = width;
 
     }
-    void startGame(){ //main will call this function
+    void startGame(){
         m_board.startGame(this);
         m_screen.startGame();
         m_menu.startGame();

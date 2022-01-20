@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 
 /**
+ * @Author Minh Le
  *
  */
 public class Highscore {
