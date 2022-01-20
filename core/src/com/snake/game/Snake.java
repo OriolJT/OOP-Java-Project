@@ -31,6 +31,12 @@ public class Snake {
         snakeCells = new LinkedList<>();
         size = 0;
         playerState = null;
+
+        //TODO - for test
+        Cell ex1 = new Cell(5,5);
+        snakeCells.add(ex1);
+        Cell ex2 = new Cell(20,20);
+        snakeCells.add(ex2);
     }
 
 

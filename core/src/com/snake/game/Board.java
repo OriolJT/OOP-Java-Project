@@ -90,6 +90,12 @@ public class Board {
             }
         }
 
+        //TODO - For test
+        m_cells[5][5].setState(State.SNAKE);
+        m_cells[15][5].setState(State.ITEM);
+        m_cells[20][20].setState(State.SNAKE2);
+
+
         //Now we generate the 1st item of the game.
         tempItemNum = createItem();
         gameMode(mode);
@@ -173,6 +179,7 @@ public class Board {
     }
 
     public void moveSnake(int player) {
+        m_player1.mySnake.moveSnake(m_player1.mySnake.movement()); //Move snake to free cell
         if (player == 1) {
             switch (m_player1.mySnake.crash(m_player1.mySnake.movement())) {
                 case 0:

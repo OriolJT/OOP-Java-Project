@@ -1,11 +1,11 @@
 package com.snake.game.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.snake.game.*;
 import com.snake.game.Cell;
-import com.sun.rowset.internal.Row;
 
 import java.util.LinkedList;
 import java.util.Random;
@@ -35,6 +35,7 @@ public class GameScreen extends Screen_Abstract implements Runnable {
         this.cells = s_main.main.m_board.getCells();
         this.board = s_main.main.m_board;
         renderer = new Renderer(this);
+
         //initializes Player 1 with modeFlag==1 (Single Player)
         if(main.m_screen.playScreen.modeFlag==1){
             board.setM_player1(new Player());
@@ -63,6 +64,9 @@ public class GameScreen extends Screen_Abstract implements Runnable {
             for (Cell c: snakeCells
                  ) {
                 //TODO Draw SnakeCells and IMG;
+                int x = c.getX();
+                int y = c.getY();
+                renderer.render(1, x, y);
             }
         }
         if(main.m_screen.playScreen.modeFlag==2) {
@@ -70,10 +74,16 @@ public class GameScreen extends Screen_Abstract implements Runnable {
             LinkedList<Cell> snakeCells2 = board.getM_player2().getSnake().getSnakeCells();
             for(Cell c : snakeCells){
                 //TODO Draw SnakeCells Player 1
+                int x = c.getX();
+                int y = c.getY();
+                 renderer.render(1, x, y);
             }
             for (Cell c: snakeCells2
                  ) {
                 //TODO Draw SnakeCells Player 2
+                int x = c.getX();
+                int y = c.getY();
+                renderer.render(2, x, y);
             }
             }
         }
@@ -160,7 +170,9 @@ public class GameScreen extends Screen_Abstract implements Runnable {
 
     @Override
     public void render(float delta){
-        renderer.render();
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
         drawItem();
         drawSnake();
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
